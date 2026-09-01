@@ -10,20 +10,25 @@
     <title>Securovo // Siber Güvenlik Analiz Platformu</title>
     <style>
         :root {
-            --bg: #0b0f19;
-            --card-bg: #151c2c;
+            --bg: #070a12;
+            --card-bg: rgba(18, 26, 43, 0.75);
             --accent: #00f2fe;
+            --accent-glow: rgba(0, 242, 254, 0.35);
             --green: #00ff88;
             --red: #ff3366;
             --orange: #ff9900;
-            --text: #c8d6e5;
-            --border: #222f3e;
+            --text: #e0e8f5;
+            --subtext: #8fa3bf;
+            --border: rgba(0, 242, 254, 0.15);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Consolas', 'Segoe UI', monospace; }
 
         body {
             background-color: var(--bg);
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(0, 242, 254, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(112, 0, 255, 0.08) 0%, transparent 40%);
             color: var(--text);
             display: flex;
             justify-content: center;
@@ -34,65 +39,149 @@
 
         .container {
             width: 100%;
-            max-width: 900px;
+            max-width: 950px;
             background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 35px;
-            box-shadow: 0 0 40px rgba(0, 242, 254, 0.08);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.6), inset 0 0 1px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
         }
 
-        .brand {
-            text-align: center;
-            margin-bottom: 30px;
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
         }
+
+        .header-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 15px;
+        }
+
+        .system-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            color: var(--green);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--green);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--green);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 255, 136, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
+        }
+
+        .brand { text-align: center; margin-bottom: 30px; }
 
         .brand h1 {
-            color: var(--accent);
-            font-size: 32px;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+            color: #fff;
+            font-size: 36px;
+            letter-spacing: 4px;
+            text-shadow: 0 0 15px var(--accent-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
         }
 
-        .brand p { font-size: 13px; color: #8395a7; margin-top: 5px; }
+        .brand h1 span { color: var(--accent); }
+
+        .brand p { font-size: 12px; color: var(--subtext); margin-top: 8px; letter-spacing: 1px; }
+
+        .search-section { margin-bottom: 30px; }
 
         .search-area {
             display: flex;
             gap: 12px;
-            margin-bottom: 30px;
+            margin-bottom: 12px;
         }
 
         input[type="text"] {
             flex: 1;
-            background: #0d131d;
+            background: rgba(8, 12, 22, 0.8);
             border: 1px solid var(--border);
-            padding: 15px 20px;
-            border-radius: 8px;
+            padding: 16px 22px;
+            border-radius: 10px;
             color: #fff;
             font-size: 15px;
             outline: none;
+            transition: all 0.3s ease;
         }
 
         input[type="text"]:focus {
             border-color: var(--accent);
-            box-shadow: 0 0 12px rgba(0, 242, 254, 0.2);
+            box-shadow: 0 0 20px var(--accent-glow);
+            background: rgba(12, 18, 32, 0.9);
         }
 
         button {
-            background: linear-gradient(45deg, #00c6ff, #0072ff);
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
             color: #fff;
             border: none;
-            padding: 15px 30px;
-            border-radius: 8px;
+            padding: 16px 32px;
+            border-radius: 10px;
             font-weight: bold;
             font-size: 14px;
+            letter-spacing: 1px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 114, 255, 0.3);
         }
 
         button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 114, 255, 0.4);
+            box-shadow: 0 6px 25px rgba(0, 242, 254, 0.5);
+        }
+
+        .quick-demos {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+            color: var(--subtext);
+        }
+
+        .demo-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            padding: 4px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 11px;
+            transition: 0.2s;
+        }
+
+        .demo-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(0, 242, 254, 0.1);
         }
 
         .dashboard { display: none; }
@@ -101,15 +190,17 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #0d131d;
-            padding: 20px 25px;
-            border-radius: 10px;
+            background: rgba(8, 12, 22, 0.8);
+            padding: 25px 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
             border-left: 5px solid var(--accent);
             margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .score-box { text-align: right; }
-        .score-val { font-size: 36px; font-weight: bold; }
+        .score-val { font-size: 42px; font-weight: bold; text-shadow: 0 0 10px rgba(0,0,0,0.5); }
 
         .grid-metrics {
             display: grid;
@@ -119,79 +210,120 @@
         }
 
         .metric {
-            background: #0d131d;
-            padding: 15px;
-            border-radius: 8px;
+            background: rgba(8, 12, 22, 0.6);
+            padding: 18px;
+            border-radius: 10px;
             border: 1px solid var(--border);
             text-align: center;
+            transition: 0.3s;
         }
 
-        .metric span { display: block; font-size: 11px; color: #8395a7; margin-bottom: 6px; }
-        .metric strong { font-size: 16px; color: #fff; }
+        .metric:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent);
+            box-shadow: 0 5px 15px var(--accent-glow);
+        }
 
-        .threat-title { font-size: 16px; margin-bottom: 12px; color: #fff; }
+        .metric span { display: block; font-size: 11px; color: var(--subtext); margin-bottom: 8px; letter-spacing: 0.5px; }
+        .metric strong { font-size: 17px; color: #fff; }
+
+        .threat-title { font-size: 16px; margin-bottom: 15px; color: #fff; letter-spacing: 1px; }
 
         .threat-list { list-style: none; }
 
         .threat-item {
-            background: #0d131d;
-            padding: 14px 18px;
-            border-radius: 8px;
-            margin-bottom: 10px;
+            background: rgba(8, 12, 22, 0.6);
+            padding: 16px 20px;
+            border-radius: 10px;
+            margin-bottom: 12px;
             border: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: 0.2s;
         }
+
+        .threat-item:hover { background: rgba(12, 18, 32, 0.8); }
 
         .threat-item.YÜKSEK { border-left: 4px solid var(--red); }
         .threat-item.ORTA { border-left: 4px solid var(--orange); }
 
         .badge {
-            padding: 4px 10px;
-            border-radius: 4px;
+            padding: 5px 12px;
+            border-radius: 6px;
             font-size: 11px;
             font-weight: bold;
+            letter-spacing: 1px;
         }
 
-        .badge-red { background: rgba(255, 51, 102, 0.2); color: var(--red); }
-        .badge-orange { background: rgba(255, 153, 0, 0.2); color: var(--orange); }
+        .badge-red { background: rgba(255, 51, 102, 0.15); color: var(--red); border: 1px solid rgba(255, 51, 102, 0.3); }
+        .badge-orange { background: rgba(255, 153, 0, 0.15); color: var(--orange); border: 1px solid rgba(255, 153, 0, 0.3); }
 
         .loader {
             display: none;
             text-align: center;
-            padding: 30px;
+            padding: 40px;
             color: var(--accent);
             font-size: 14px;
         }
+
+        .cyber-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(0, 242, 254, 0.1);
+            border-top: 3px solid var(--accent);
+            border-radius: 50%;
+            margin: 0 auto 20px auto;
+            animation: spin 1s linear infinite;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="brand">
-        <h1>🛡️ SECUROVO</h1>
-        <p>GELİŞMİŞ WEB GÜVENLİK VE TEHDİT ANALİZ PLATFORMU</p>
+    <div class="header-status">
+        <span style="font-size: 12px; color: var(--subtext);">SECUROVO v2.0 // COMMAND CENTER</span>
+        <div class="system-badge">
+            <div class="pulse-dot"></div>
+            SYSTEM ONLINE
+        </div>
     </div>
 
-    <div class="search-area">
-        <input type="text" id="targetUrl" placeholder="Taranacak Web Adresi (Örn: example.com)">
-        <button onclick="runAnalysis()">ANALİZ ET</button>
+    <div class="brand">
+        <h1>🛡️ <span>SECUROVO</span></h1>
+        <p>GELİŞMİŞ SİBER TEHDİT VE KOD ANALİZ PLATFORMU</p>
+    </div>
+
+    <div class="search-section">
+        <div class="search-area">
+            <input type="text" id="targetUrl" placeholder="Taranacak Web Adresini Girin (Örn: google.com)">
+            <button onclick="runAnalysis()">ANALİZ ET</button>
+        </div>
+        <div class="quick-demos">
+            <span>Hızlı Test:</span>
+            <button class="demo-btn" onclick="quickScan('google.com')">google.com</button>
+            <button class="demo-btn" onclick="quickScan('github.com')">github.com</button>
+            <button class="demo-btn" onclick="quickScan('example.com')">example.com</button>
+        </div>
     </div>
 
     <div class="loader" id="loader">
-        <p>⚡ Securovo taptaze verileri çekiyor ve kodları tarıyor...</p>
+        <div class="cyber-spinner"></div>
+        <p>⚡ Securovo taptaze verileri çekiyor ve derin analiz yapıyor...</p>
     </div>
 
     <div class="dashboard" id="dashboard">
         <div class="score-card" id="scoreCard">
             <div>
-                <h3 id="statusText" style="font-size: 20px;">-</h3>
-                <p id="targetDisplay" style="font-size: 12px; color: #8395a7; margin-top: 4px;">-</p>
+                <h3 id="statusText" style="font-size: 22px; color: #fff;">-</h3>
+                <p id="targetDisplay" style="font-size: 12px; color: var(--subtext); margin-top: 5px;">-</p>
             </div>
             <div class="score-box">
                 <div class="score-val" id="scoreVal">0</div>
-                <span style="font-size: 11px; color: #8395a7;">GÜVENLİK PUANI</span>
+                <span style="font-size: 11px; color: var(--subtext); letter-spacing: 1px;">GÜVENLİK PUANI</span>
             </div>
         </div>
 
@@ -220,13 +352,18 @@
 </div>
 
 <script>
+    function quickScan(domain) {
+        document.getElementById('targetUrl').value = domain;
+        runAnalysis();
+    }
+
     async function runAnalysis() {
         const url = document.getElementById('targetUrl').value;
         const loader = document.getElementById('loader');
         const dashboard = document.getElementById('dashboard');
 
         if (!url) {
-            alert("Lütfen bir URL girin!");
+            alert("Lütfen taranacak bir URL girin!");
             return;
         }
 
@@ -276,8 +413,8 @@
                     threatList.innerHTML += `
                         <li class="threat-item ${t.severity}">
                             <div>
-                                <strong>${t.threatName}</strong>
-                                <p style="font-size: 12px; color: #8395a7; margin-top: 3px;">${t.desc}</p>
+                                <strong style="color: #fff;">${t.threatName}</strong>
+                                <p style="font-size: 12px; color: var(--subtext); margin-top: 4px;">${t.desc}</p>
                             </div>
                             <span class="badge ${badgeClass}">${t.severity}</span>
                         </li>
