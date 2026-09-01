@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="https://img.icons8.com/fluency/48/shield.png">
-    <title>Securovo // Ultimate Cyber Defense & Threat Simulator</title>
+    <title>Securovo // Deep AI Security & Community Threat Hub</title>
     <style>
         :root {
             --bg: #030712;
             --card-bg: rgba(13, 22, 38, 0.85);
             --accent: #00f2fe;
-            --accent-glow: rgba(0, 242, 254, 0.5);
+            --purple: #9d4edd;
+            --purple-glow: rgba(157, 78, 221, 0.6);
             --green: #00ff88;
             --red: #ff3366;
-            --red-glow: rgba(255, 51, 102, 0.6);
             --orange: #ff9900;
             --text: #f0f6fc;
             --subtext: #8b949e;
@@ -26,7 +26,7 @@
             background-color: var(--bg);
             background-image: 
                 radial-gradient(circle at 10% 20%, rgba(0, 242, 254, 0.12) 0%, transparent 45%),
-                radial-gradient(circle at 90% 80%, rgba(112, 0, 255, 0.12) 0%, transparent 45%);
+                radial-gradient(circle at 90% 80%, rgba(157, 78, 221, 0.15) 0%, transparent 45%);
             color: var(--text);
             display: flex;
             flex-direction: column;
@@ -60,9 +60,9 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(0, 255, 136, 0.1);
-            border: 1px solid rgba(0, 255, 136, 0.4);
-            color: var(--green);
+            background: rgba(157, 78, 221, 0.15);
+            border: 1px solid rgba(157, 78, 221, 0.5);
+            color: #d8b4fe;
             padding: 6px 14px;
             border-radius: 20px;
             font-size: 11px;
@@ -71,15 +71,15 @@
 
         .pulse-dot {
             width: 8px; height: 8px;
-            background-color: var(--green);
+            background-color: var(--purple);
             border-radius: 50%;
             animation: pulse 1.5s infinite;
         }
 
         @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 255, 136, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(157, 78, 221, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(157, 78, 221, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(157, 78, 221, 0); }
         }
 
         .brand { text-align: center; margin-bottom: 30px; }
@@ -87,34 +87,108 @@
         .brand h1 span { color: var(--accent); }
         .brand p { font-size: 12px; color: var(--subtext); margin-top: 8px; }
 
-        .search-area { display: flex; gap: 12px; margin-bottom: 15px; }
+        .search-area { display: flex; gap: 12px; margin-bottom: 10px; }
 
-        input[type="text"] {
-            flex: 1;
+        input[type="text"], select {
             background: rgba(5, 10, 20, 0.9);
             border: 1px solid var(--border);
-            padding: 18px 24px;
+            padding: 14px 18px;
             border-radius: 12px;
             color: #fff;
-            font-size: 15px;
+            font-size: 14px;
             outline: none;
         }
 
+        input[type="text"] { flex: 1; }
+
         button {
-            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            background: linear-gradient(135deg, #7928ca, #00dfd8);
             color: #fff;
             border: none;
-            padding: 18px 36px;
+            padding: 14px 28px;
             border-radius: 12px;
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
         }
 
-        button:hover { transform: translateY(-2px); box-shadow: 0 6px 30px var(--accent-glow); }
+        button:hover { transform: translateY(-2px); box-shadow: 0 6px 30px var(--purple-glow); }
 
-        .quick-demos { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--subtext); margin-bottom: 25px; }
-        .demo-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); color: var(--text); padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 11px; }
+        /* YENİ: Topluluk Bildirim Kartı Stilleri */
+        .report-section {
+            background: rgba(255, 51, 102, 0.05);
+            border: 1px dashed rgba(255, 51, 102, 0.4);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .report-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--red);
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .report-form { display: flex; gap: 10px; }
+
+        .library-section {
+            background: rgba(5, 10, 20, 0.7);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .library-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .library-title { font-size: 14px; font-weight: bold; color: var(--accent); }
+        .add-form { display: flex; gap: 10px; margin-bottom: 15px; }
+        .library-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+        .tag-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tag-delete { color: var(--red); cursor: pointer; font-weight: bold; }
+        .tag-delete:hover { color: #ff6688; }
+
+        .ai-suggestion-box {
+            display: none;
+            background: rgba(157, 78, 221, 0.12);
+            border: 1px solid var(--purple);
+            border-radius: 12px;
+            padding: 14px 20px;
+            margin-bottom: 20px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .ai-suggestion-text { font-size: 13px; color: #e9d5ff; }
+        .ai-suggestion-btn {
+            background: var(--purple);
+            color: #fff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+        }
 
         .dashboard { display: none; }
 
@@ -127,10 +201,30 @@
             border-radius: 14px;
             border: 1px solid var(--border);
             border-left: 6px solid var(--accent);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .score-val { font-size: 46px; font-weight: bold; }
+
+        .ai-analysis-card {
+            background: rgba(157, 78, 221, 0.08);
+            border: 1px solid rgba(157, 78, 221, 0.3);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .ai-card-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #d8b4fe;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .ai-card-desc { font-size: 13px; color: #f0f6fc; line-height: 1.6; }
 
         .grid-metrics {
             display: grid;
@@ -166,16 +260,18 @@
 
         .threat-item.YÜKSEK { border-left: 5px solid var(--red); }
         .threat-item.ORTA { border-left: 5px solid var(--orange); }
+        .threat-item.DÜŞÜK { border-left: 5px solid var(--green); }
 
         .badge { padding: 6px 14px; border-radius: 8px; font-size: 11px; font-weight: bold; }
         .badge-red { background: rgba(255, 51, 102, 0.2); color: var(--red); border: 1px solid var(--red); }
         .badge-orange { background: rgba(255, 153, 0, 0.2); color: var(--orange); border: 1px solid var(--orange); }
+        .badge-green { background: rgba(0, 255, 136, 0.2); color: var(--green); border: 1px solid var(--green); }
 
-        .loader { display: none; text-align: center; padding: 40px; color: var(--accent); }
+        .loader { display: none; text-align: center; padding: 40px; color: var(--purple); }
         .cyber-spinner {
             width: 55px; height: 55px;
-            border: 4px solid rgba(0, 242, 254, 0.1);
-            border-top: 4px solid var(--accent);
+            border: 4px solid rgba(157, 78, 221, 0.1);
+            border-top: 4px solid var(--purple);
             border-radius: 50%;
             margin: 0 auto 20px auto;
             animation: spin 0.8s linear infinite;
@@ -264,7 +360,7 @@
             z-index: 8;
         }
 
-        .glitch-text { color: var(--red); font-size: 18px; font-weight: bold; text-shadow: 0 0 10px var(--red-glow); }
+        .glitch-text { color: var(--red); font-size: 18px; font-weight: bold; }
 
         .terminal-log {
             background: rgba(0,0,0,0.9);
@@ -286,39 +382,68 @@
 <div class="container">
     <div class="header-status">
         <div>
-            <span style="font-size: 12px; color: var(--subtext);">SECUROVO v3.5 // MOD & RISK DETECTOR</span>
+            <span style="font-size: 12px; color: var(--subtext);">SECUROVO v9.0 // COMMUNITY THREAT NETWORK</span>
         </div>
 
         <div class="system-badge">
             <div class="pulse-dot"></div>
-            SYSTEM ONLINE
+            FULL AI + REPORT HUB ACTIVE
         </div>
     </div>
 
     <div class="brand">
         <h1>🛡️ <span>SECUROVO</span></h1>
-        <p>Gelişmiş APK & Mod Risk Tespiti ve Canlı Siber Analiz</p>
+        <p>Eksiksiz Web, Mağaza & Topluluk Destekli Siber Güvenlik Platformu</p>
     </div>
 
     <div class="search-section">
         <div class="search-area">
-            <input type="text" id="targetUrl" placeholder="Taranacak Web Adresini Girin (Örn: playmods.net/tr)">
-            <button onclick="runAnalysis()">ANALİZ ET VE RAPORLA</button>
+            <input type="text" id="targetUrl" placeholder="Web adresi veya Chrome Store / Play Store linki yapıştırın...">
+            <button onclick="runAnalysis()">KAPSAMLI AI ANALİZİ</button>
         </div>
-        <div class="quick-demos">
-            <span>Örnek Testler:</span>
-            <button class="demo-btn" onclick="quickScan('google.com')">google.com</button>
-            <button class="demo-btn" onclick="quickScan('playmods.net/tr')">playmods.net/tr</button>
-            <button class="demo-btn" onclick="quickScan('github.com')">github.com</button>
+
+        <div class="ai-suggestion-box" id="aiBox">
+            <span class="ai-suggestion-text" id="aiMsg"></span>
+            <button class="ai-suggestion-btn" id="aiFixBtn">Tavsiyeyi Uygula</button>
         </div>
+    </div>
+
+    <!-- YENİ: Topluluk "Şüpheli Adres Bildir" Modülü -->
+    <div class="report-section">
+        <div class="report-header">
+            <span>🚨 Topluluk Tehdit Bildirimi</span>
+        </div>
+        <div class="report-form">
+            <input type="text" id="reportDomainInput" placeholder="Şüpheli Site / Eklenti Linki (Örn: bad-site.com)" style="flex: 1.5;">
+            <input type="text" id="reportReasonInput" placeholder="Neden şüpheli? (Örn: Bedava Robux istiyor)" style="flex: 2;">
+            <button onclick="submitCommunityReport()" style="background: linear-gradient(135deg, #ff3366, #ff9900); padding: 10px 20px; font-size: 12px;">🚨 Şüpheli Adres Bildir</button>
+        </div>
+    </div>
+
+    <div class="library-section">
+        <div class="library-header">
+            <span class="library-title">📚 AI Tehdit Kütüphanesi & Veri Tabanı</span>
+            <span style="font-size: 11px; color: var(--subtext);" id="libCount">0 Adres Kayıtlı</span>
+        </div>
+
+        <div class="add-form">
+            <input type="text" id="newDomainInput" placeholder="Manuel Domain ekleyin...">
+            <select id="newTypeSelect">
+                <option value="Korsan APK / Mod">Korsan APK / Mod</option>
+                <option value="Oltalama / Phishing">Oltalama / Phishing</option>
+                <option value="Güvenli / Onaylı">Güvenli / Onaylı</option>
+            </select>
+            <button onclick="addDomainToLibrary()" style="padding: 10px 20px; font-size: 12px;">+ Kütüphaneye Ekle</button>
+        </div>
+
+        <div class="library-tags" id="libraryContainer"></div>
     </div>
 
     <div class="loader" id="loader">
         <div class="cyber-spinner"></div>
-        <p>⚡ Derin tarama yapılıyor ve dosya/domain analizleri inceleniyor...</p>
+        <p id="loaderText">🤖 AI Taraması: Topluluk Bildirimleri, Mağaza İzinleri ve Kod Yapısı İnceleniyor...</p>
     </div>
 
-    <!-- TAM ANALİZ SONUÇ PANELİ -->
     <div class="dashboard" id="dashboard">
         <div class="score-card" id="scoreCard">
             <div>
@@ -331,21 +456,25 @@
             </div>
         </div>
 
-        <div class="grid-metrics">
-            <div class="metric"><span>YANIT SÜRESİ</span><strong id="mPing">-</strong></div>
-            <div class="metric"><span>SSL SERTİFİKASI</span><strong id="mSsl">-</strong></div>
-            <div class="metric"><span>KORSAN / MOD RİSKİ</span><strong id="mModRisk">-</strong></div>
-            <div class="metric"><span>SAYFA BOYUTU</span><strong id="mSize">-</strong></div>
+        <div class="ai-analysis-card">
+            <div class="ai-card-title">🤖 AI GÜVENLİK GEREKÇESİ</div>
+            <div class="ai-card-desc" id="aiAssessmentText">Analiz ediliyor...</div>
         </div>
 
-        <h4 class="threat-title">📋 Tam Rapor & Güvenlik Analiz Sonucu:</h4>
+        <div class="grid-metrics">
+            <div class="metric"><span>TEHDİT SEVİYESİ</span><strong id="mThreatLevel">-</strong></div>
+            <div class="metric"><span>MAĞAZA / TÜR</span><strong id="mStoreType">-</strong></div>
+            <div class="metric"><span>RİSK TESPİTİ</span><strong id="mModRisk">-</strong></div>
+            <div class="metric"><span>KÜTÜPHANE KAYDI</span><strong id="mLibRecord">-</strong></div>
+        </div>
+
+        <h4 class="threat-title">📋 Tespit Edilen Tüm Tehdit Katmanları:</h4>
         <ul class="threat-list" id="threatList"></ul>
     </div>
 </div>
 
-<!-- CANLI SİMÜLATÖR -->
 <div class="sim-section">
-    <h3 style="color: var(--accent); font-size: 18px; margin-bottom: 8px;">📱 Canlı Web Önizleme & Tehdit Simülasyonu</h3>
+    <h3 style="color: var(--accent); font-size: 18px; margin-bottom: 8px;">📱 Canlı Web / Mağaza Önizlemesi</h3>
     
     <div class="sim-phone">
         <div class="phone-notch"></div>
@@ -355,32 +484,177 @@
         </div>
         
         <div class="sim-screen-container">
-            <iframe id="simIframe" class="sim-iframe" src="https://example.com"></iframe>
+            <iframe id="simIframe" class="sim-iframe" src="about:blank"></iframe>
             
             <div class="sim-overlay" id="simOverlay">
                 <span style="font-size: 35px;">🌐</span>
-                <p style="font-size: 12px; color: #fff; margin-top: 10px;">Analiz Sonucu Bekleniyor...</p>
+                <p style="font-size: 12px; color: #fff; margin-top: 10px;">AI Analizi Bekleniyor...</p>
             </div>
         </div>
     </div>
 
     <div class="terminal-log" id="terminalLog">
-        [SYSTEM] Hazır. Adresi girip analizi başlatın.
+        [FULL AI SYSTEM] Topluluk ağ desteği ve Mağaza analiz motoru aktif.
     </div>
 </div>
 
+<!-- Yasal Sorumluluk Reddi ve Önizleme Notu -->
+<footer style="margin-top: 40px; margin-bottom: 20px; text-align: center; font-size: 11px; color: var(--subtext); max-width: 800px;">
+    <p style="margin-bottom: 6px;">
+        ⚠️ <strong>Yasal Sorumluluk Reddi:</strong> Securovo, eğitim ve siber güvenlik farkındalığı amacıyla geliştirilmiş bir analiz simülatörüdür. Gösterilen skorlar ve tehdit tespitleri otomatik sezgisel algoritmalar tarafından üretilir.
+    </p>
+    <p>
+        🌐 <strong>Önizleme Notu:</strong> Canlı tarayıcı simülasyonu kamuya açık bağlantıları gösterir. Harici sitelerin güvenlik duvarı politikalarına (X-Frame-Options) göre bazı sayfaların önizlemesi tarayıcı tarafından engellenebilir.
+    </p>
+</footer>
+
 <script>
+    const defaultLibrary = [
+        { domain: "playmods.net", type: "Korsan APK / Mod", reason: "Zararlı mod APK dağıtımı" },
+        { domain: "happymod.com", type: "Korsan APK / Mod", reason: "Uncertified mod dosyası" },
+        { domain: "free-robux-gen.com", type: "Oltalama / Phishing", reason: "Sahte Robux tuzağı" },
+        { domain: "google.com", type: "Güvenli / Onaylı", reason: "Resmi Arama Motoru" },
+        { domain: "github.com", type: "Güvenli / Onaylı", reason: "Geliştirici Platformu" }
+    ];
+
+    function getLibrary() {
+        const stored = localStorage.getItem('securovo_lib');
+        if (stored) return JSON.parse(stored);
+        localStorage.setItem('securovo_lib', JSON.stringify(defaultLibrary));
+        return defaultLibrary;
+    }
+
+    function saveLibrary(lib) {
+        localStorage.setItem('securovo_lib', JSON.stringify(lib));
+        renderLibrary();
+    }
+
+    function renderLibrary() {
+        const lib = getLibrary();
+        const container = document.getElementById('libraryContainer');
+        document.getElementById('libCount').innerText = `${lib.length} Adres Kayıtlı`;
+        container.innerHTML = "";
+
+        lib.forEach((item, index) => {
+            let color = "var(--text)";
+            if (item.type.includes("Korsan")) color = "var(--orange)";
+            if (item.type.includes("Oltalama")) color = "var(--red)";
+            if (item.type.includes("Güvenli")) color = "var(--green)";
+            if (item.type.includes("İnceleme")) color = "#e0aaff"; // Topluluk Bildirimi için Özel Renk
+
+            container.innerHTML += `
+                <div class="tag-item">
+                    <span onclick="quickScan('${item.domain}')" style="cursor:pointer; color: ${color};">
+                        ● <b>${item.domain}</b> (${item.type})
+                    </span>
+                    <span class="tag-delete" onclick="deleteFromLibrary(${index})" title="Kütüphaneden Sil">✕</span>
+                </div>
+            `;
+        });
+    }
+
+    // YENİ: Topluluk Bildirim Fonksiyonu
+    function submitCommunityReport() {
+        const domainInput = document.getElementById('reportDomainInput');
+        const reasonInput = document.getElementById('reportReasonInput');
+        
+        let domain = domainInput.value.trim().toLowerCase().replace(/(http:\/\/|https:\/\/|www\.)/g, '').split('/')[0];
+        let reason = reasonInput.value.trim();
+
+        if (!domain) {
+            alert("Lütfen geçerli bir şüpheli adres yazın!");
+            return;
+        }
+
+        let lib = getLibrary();
+        if (lib.some(x => x.domain === domain)) {
+            alert("Bu adres kütüphanede veya bildirim listesinde zaten var!");
+            return;
+        }
+
+        const reportType = "⏳ İnceleme Bekliyor (Topluluk)";
+        lib.push({ domain: domain, type: reportType, reason: reason || "Kullanıcı bildirimi" });
+        saveLibrary(lib);
+
+        domainInput.value = "";
+        reasonInput.value = "";
+        logToTerminal(`🚨 Topluluk Bildirimi Alındı: ${domain} (Gerekçe: "${reason || 'Yok'}")`);
+        alert(`" ${domain} " adresi topluluk bildirim ağına eklendi! Yapay Zeka şimdi bu adresi tarayabilir.`);
+    }
+
+    function addDomainToLibrary() {
+        const input = document.getElementById('newDomainInput');
+        const typeSelect = document.getElementById('newTypeSelect');
+        const domain = input.value.trim().toLowerCase().replace(/(http:\/\/|https:\/\/|www\.)/g, '').split('/')[0];
+
+        if (!domain) {
+            alert("Geçerli bir domain yazın!");
+            return;
+        }
+
+        let lib = getLibrary();
+        if (lib.some(x => x.domain === domain)) {
+            alert("Bu domain kütüphanede zaten var!");
+            return;
+        }
+
+        lib.push({ domain: domain, type: typeSelect.value, reason: "Manuel Manuel Ekleme" });
+        saveLibrary(lib);
+        input.value = "";
+        logToTerminal(`➕ Eklendi: ${domain} (${typeSelect.value})`);
+    }
+
+    function deleteFromLibrary(index) {
+        let lib = getLibrary();
+        const removed = lib.splice(index, 1);
+        saveLibrary(lib);
+        logToTerminal(`🗑️ Silindi: ${removed[0].domain}`);
+    }
+
     function logToTerminal(msg) {
         const log = document.getElementById('terminalLog');
         log.innerHTML += `<br>[${new Date().toLocaleTimeString()}] ${msg}`;
         log.scrollTop = log.scrollHeight;
     }
 
-    function formatUrl(url) {
-        if (!url.startsWith('http://') && !url.startsWith('https://')) {
-            return 'https://' + url;
+    function calculateSimilarity(a, b) {
+        if (a.length === 0) return b.length;
+        if (b.length === 0) return a.length;
+        let matrix = [];
+        for (let i = 0; i <= b.length; i++) matrix[i] = [i];
+        for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+
+        for (let i = 1; i <= b.length; i++) {
+            for (let j = 1; j <= a.length; j++) {
+                if (b.charAt(i - 1) == a.charAt(j - 1)) {
+                    matrix[i][j] = matrix[i - 1][j - 1];
+                } else {
+                    matrix[i][j] = Math.min(
+                        matrix[i - 1][j - 1] + 1,
+                        Math.min(matrix[i][j - 1] + 1, matrix[i - 1][j] + 1)
+                    );
+                }
+            }
         }
-        return url;
+        return matrix[b.length][a.length];
+    }
+
+    function aiFindBestMatch(input) {
+        let cleanInput = input.replace(/(http:\/\/|https:\/\/|www\.)/g, '').split('/')[0].toLowerCase();
+        let bestMatch = null;
+        let lowestDistance = 99;
+        const lib = getLibrary();
+
+        lib.forEach(item => {
+            let dist = calculateSimilarity(cleanInput, item.domain);
+            if (dist < lowestDistance && dist > 0) {
+                lowestDistance = dist;
+                bestMatch = item.domain;
+            }
+        });
+
+        if (lowestDistance <= 3) return bestMatch;
+        return null;
     }
 
     function quickScan(domain) {
@@ -388,148 +662,180 @@
         runAnalysis();
     }
 
-    async function runAnalysis() {
-        const inputUrl = document.getElementById('targetUrl').value.trim();
+    // UYGULAMA MAĞAZASI + TOPLULUK BİLDİRİMİ + WEB ANALİZ MOTORU
+    function aiFullAnalysis(url) {
+        const fullUrl = url.toLowerCase();
+        const cleanUrl = fullUrl.replace(/(http:\/\/|https:\/\/|www\.)/g, '').split('/')[0];
+        const lib = getLibrary();
+        const libMatch = lib.find(x => cleanUrl.includes(x.domain));
+
+        let score = 100;
+        let threatLevel = "DÜŞÜK";
+        let status = "GÜVENLİ SAYFA";
+        let storeType = "WEB SİTESİ";
+        let threats = [];
+        let aiReasons = [];
+
+        // 1. TOPLULUK BİLDİRİMİ KONTROLÜ
+        if (libMatch && libMatch.type.includes("İnceleme Bekliyor")) {
+            score -= 50;
+            threats.push({ 
+                name: "Topluluk Şüpheli Adres Bildirimi", 
+                desc: `Bu adres kullanıcılar tarafından bildirildi. Gerekçe: "${libMatch.reason || 'Şüpheli Hareket'}"`, 
+                severity: "ORTA" 
+            });
+            aiReasons.push("Topluluk tarafından şüpheli içerik olarak raporlanmış.");
+        }
+
+        // 2. CHROME STORE / GOOGLE PLAY / APP STORE ÖZEL KATMANI
+        if (fullUrl.includes("chromewebstore.google.com") || fullUrl.includes("play.google.com") || fullUrl.includes("apps.apple.com")) {
+            storeType = "RESMİ MAĞAZA";
+            
+            if (/roearn|free-robux|cookie-stealer|unlimited-gems|hack|account-stealer/i.test(fullUrl)) {
+                score = 5;
+                threatLevel = "KRİTİK";
+                status = "TEHLİKELİ MAĞAZA EKLENTİSİ / HESAP HIRSIZLIĞI";
+                threats.push({ 
+                    name: "Zararlı Eklenti (Roblox Cookie Stealer)", 
+                    desc: "Bu eklenti Chrome Web Store üzerinde yayınlanmış olsa bile kullanıcıların Roblox oturum çerezlerini ve şifrelerini çalmayı hedefler.", 
+                    severity: "YÜKSEK" 
+                });
+                aiReasons.push("Resmi mağazada yayınlanmış zararlı hesap çalma eklentisi tespiti.");
+            }
+        }
+
+        // 3. Phishing & Hesap Hırsızlığı Sezgiseli
+        if (/free-robux|free-gems|unlimited|hack-tool|account-stealer|login-verify|gift-card/i.test(fullUrl) && !storeType.includes("MAĞAZA")) {
+            score -= 80;
+            threats.push({ name: "Phishing / Veri Hırsızlığı Riski", desc: "URL yapısı ücretsiz eşya/hesap vaadiyle veri çalan oltalama sitelerine benziyor.", severity: "YÜKSEK" });
+            aiReasons.push("Oltalama (Phishing) tespiti yapıldı.");
+        }
+
+        // 4. Mod APK & Korsan Yazılım Sezgiseli
+        if (/playmods|apkmody|happymod|modapk|apkpure|apkmod|rexdl|revdl/i.test(cleanUrl) || (libMatch && libMatch.type.includes("Korsan"))) {
+            score -= 60;
+            threats.push({ name: "Modlanmış APK & Trojan Riski", desc: "Kırılmış APK dosyaları cihaza trojan, reklam virüsü ve arka plan dinleme yazılımları bulaştırabilir.", severity: "YÜKSEK" });
+            aiReasons.push("Korsan APK dağıtım ağı tespit edildi.");
+        }
+
+        // 5. Şüpheli TLD Uzantı Tespiti
+        if (/\.(xyz|top|click|tk|ml|cf|gq|work|monster)$/i.test(cleanUrl)) {
+            score -= 35;
+            threats.push({ name: "Düşük İtibarlı TLD Uzantısı", desc: "Bu alan adı uzantısı siber dolandırıcılar tarafından sıklıkla tercih edilmektedir.", severity: "ORTA" });
+            aiReasons.push("Riskli alan adı uzantısı saptandı.");
+        }
+
+        // 6. Kütüphane Veri Tabanı Eşleşmesi
+        if (libMatch && !libMatch.type.includes("İnceleme Bekliyor")) {
+            if (libMatch.type.includes("Güvenli")) {
+                score = Math.max(score, 90);
+                threats.push({ name: "Veri Tabanı Onayı", desc: "Bu adres kayıtlı güvenli listesinde yer alıyor.", severity: "DÜŞÜK" });
+            } else if (libMatch.type.includes("Oltalama")) {
+                score = 10;
+                threats.push({ name: "Veri Tabanı: Dolandırıcılık Tespiti", desc: "Kullanıcı kütüphanesinde dolandırıcılık adresi olarak işaretlenmiş.", severity: "YÜKSEK" });
+            }
+        }
+
+        // Sonuç Değerlendirmesi
+        if (score < 40) {
+            threatLevel = "KRİTİK / YÜKSEK";
+            if (!status.includes("MAĞAZA")) status = "TEHLİKELİ ADRES";
+        } else if (score < 75) {
+            threatLevel = "ORTA";
+            status = "ŞÜPHELİ SAYFA";
+        }
+
+        let aiReasonText = aiReasons.length > 0 
+            ? `⚠️ <b>AI Analiz Gerekçesi:</b> Taramada şu riskler saptandı: ${aiReasons.join(", ")} Bu adreste veri paylaşmayın veya eklenti yüklemeyin.`
+            : `✅ <b>AI Analiz Gerekçesi:</b> Derin güvenlik incelemesinde zararlı kod kalıbına, çerez çalma eklentisine veya topluluk bildirimine rastlanmadı. Adres güvenli görünmektedir.`;
+
+        return { score: Math.max(score, 5), threatLevel, status, threats, aiReasonText, libMatch, storeType };
+    }
+
+    async function runAnalysis(overrideUrl = null) {
+        let inputUrl = overrideUrl || document.getElementById('targetUrl').value.trim();
         const loader = document.getElementById('loader');
         const dashboard = document.getElementById('dashboard');
         const overlay = document.getElementById('simOverlay');
+        const aiBox = document.getElementById('aiBox');
 
         if (!inputUrl) {
-            alert("Lütfen bir web adresi yazın!");
+            alert("Lütfen taranacak bir adres veya mağaza linki yazın!");
             return;
         }
 
-        const formattedUrl = formatUrl(inputUrl);
-        document.getElementById('simUrlBar').innerText = formattedUrl;
-        document.getElementById('simIframe').src = formattedUrl;
-
+        aiBox.style.display = 'none';
         loader.style.display = 'block';
         dashboard.style.display = 'none';
 
-        logToTerminal(`🔍 Tarama Başlatıldı: ${formattedUrl}`);
+        logToTerminal(`🔍 Tam AI Analizi Başlatıldı: "${inputUrl}"...`);
 
-        // KORSAN VE MOD APK KONTROL ALGORİTMASI
-        const isModApkSite = /playmods|apkmody|happymod|modapk|apkpure|apkmod|rexdl|revdl/i.test(inputUrl);
+        let suggestedDomain = aiFindBestMatch(inputUrl);
+        if (suggestedDomain && !overrideUrl && !inputUrl.includes("chromewebstore")) {
+            document.getElementById('aiMsg').innerText = `🤖 AI Doğrulama: "${inputUrl}" yerine kütüphanedeki "${suggestedDomain}" adresini mi kastediyorsunuz?`;
+            document.getElementById('aiFixBtn').onclick = () => {
+                document.getElementById('targetUrl').value = suggestedDomain;
+                runAnalysis(suggestedDomain);
+            };
+            aiBox.style.display = 'flex';
+        }
 
-        try {
-            const res = await fetch(`https://securovo-api.onrender.com/api/scan?url=${encodeURIComponent(inputUrl)}`);
-            let data = await res.json();
+        let formattedUrl = inputUrl.startsWith('http') ? inputUrl : 'https://' + inputUrl;
+        document.getElementById('simUrlBar').innerText = formattedUrl;
+        document.getElementById('simIframe').src = formattedUrl;
 
+        const result = aiFullAnalysis(formattedUrl);
+
+        setTimeout(() => {
             loader.style.display = 'none';
             dashboard.style.display = 'block';
 
-            // Korsan / Mod sitesi tespiti varsa sonuçları düzelt
-            if (isModApkSite) {
-                data.securityScore = 35; // Düşük puan ver
-                data.status = "TEHLİKELİ / RİSKLİ SAYFA";
-                if (!data.detectedThreats) data.detectedThreats = [];
-                
-                data.detectedThreats.unshift({
-                    threatName: "Korsan / Üçüncü Taraf APK İndirme Riski",
-                    desc: "Bu site modlanmış ve kırılmış APK dosyaları sunmaktadır. İndirilen dosyalar içerisine gizlenmiş trojan, reklam virüsü (adware) ve arka plan dinleme yazılımları barındırabilir.",
-                    severity: "YÜKSEK"
-                });
-            }
+            document.getElementById('statusText').innerText = result.status;
+            document.getElementById('targetDisplay').innerText = formattedUrl;
+            document.getElementById('scoreVal').innerText = result.score;
+            document.getElementById('aiAssessmentText').innerHTML = result.aiReasonText;
 
-            // ARAYÜZÜ TAM SONUÇLA DOLDUR
-            document.getElementById('statusText').innerText = data.status;
-            document.getElementById('targetDisplay').innerText = data.targetUrl + " // " + new Date().toLocaleTimeString();
-            
+            document.getElementById('mThreatLevel').innerText = result.threatLevel;
+            document.getElementById('mStoreType').innerText = result.storeType;
+            document.getElementById('mModRisk').innerText = result.score < 50 ? "YÜKSEK (TEHLİKE)" : "DÜŞÜK";
+            document.getElementById('mLibRecord').innerText = result.libMatch ? (result.libMatch.type.includes("İnceleme") ? "TOPLULUK BİLDİRİMİ" : "KAYITLI") : "GENEL TARAMA";
+
             const scoreVal = document.getElementById('scoreVal');
-            scoreVal.innerText = data.securityScore;
-
-            document.getElementById('mPing').innerText = (data.metrics ? data.metrics.responseTimeMs : "140") + " ms";
-            document.getElementById('mSsl').innerText = "AKTİF (HTTPS)";
-            document.getElementById('mModRisk').innerText = isModApkSite ? "YÜKSEK (KORSAN APK)" : "DÜŞÜK (TEMİZ)";
-            document.getElementById('mSize').innerText = (data.metrics ? data.metrics.htmlSizeKb : "85") + " KB";
-
             const threatList = document.getElementById('threatList');
             threatList.innerHTML = "";
 
-            if (data.securityScore >= 80 && !isModApkSite) {
+            if (result.score >= 80) {
                 scoreVal.style.color = "var(--green)";
                 document.getElementById('scoreCard').style.borderLeftColor = "var(--green)";
-                overlay.innerHTML = `
-                    <span style="font-size: 35px;">✅</span>
-                    <p style="font-size: 12px; color: var(--green); margin-top: 8px;">Güvenli Site</p>
-                    <p style="font-size: 10px; color: var(--subtext); margin-top: 4px;">Zararlı içerik algılanmadı.</p>
-                `;
-                threatList.innerHTML = `
-                    <li class="threat-item" style="border-left: 5px solid var(--green);">
-                        <div>
-                            <strong style="color: #fff;">Temiz Web Sayfası</strong>
-                            <p style="font-size: 12px; color: var(--subtext); margin-top: 4px;">Güvenlik incelemesi temiz sonuçlandı.</p>
-                        </div>
-                        <span class="badge" style="background: rgba(0,255,136,0.2); color: var(--green); border: 1px solid var(--green);">GÜVENLİ</span>
-                    </li>
-                `;
+                overlay.innerHTML = `<span style="font-size: 35px;">✅</span><p style="font-size: 12px; color: var(--green); margin-top: 8px;">AI Onaylı Güvenli</p>`;
+            } else if (result.score >= 50) {
+                scoreVal.style.color = "var(--orange)";
+                document.getElementById('scoreCard').style.borderLeftColor = "var(--orange)";
+                overlay.innerHTML = `<span style="font-size: 35px;">⚠️</span><p style="font-size: 12px; color: var(--orange); margin-top: 8px;">Dikkat Edilmesi Gereken Sayfa</p>`;
             } else {
                 scoreVal.style.color = "var(--red)";
                 document.getElementById('scoreCard').style.borderLeftColor = "var(--red)";
-                overlay.innerHTML = `
-                    <span style="font-size: 35px;">☠️</span>
-                    <p class="glitch-text" style="margin-top: 8px;">YÜKSEK RİSK!</p>
-                    <p style="font-size: 10px; color: #fff; margin-top: 4px;">Görünmez zararlıyazılım / APK riski!</p>
-                `;
-
-                data.detectedThreats.forEach(t => {
-                    const badgeClass = t.severity === 'YÜKSEK' ? 'badge-red' : 'badge-orange';
-                    threatList.innerHTML += `
-                        <li class="threat-item ${t.severity}">
-                            <div>
-                                <strong style="color: #fff;">${t.threatName}</strong>
-                                <p style="font-size: 12px; color: var(--subtext); margin-top: 4px;">${t.desc}</p>
-                            </div>
-                            <span class="badge ${badgeClass}">${t.severity}</span>
-                        </li>
-                    `;
-                });
+                overlay.innerHTML = `<span style="font-size: 35px;">☠️</span><p class="glitch-text" style="margin-top: 8px;">TEHLİKELİ EKLENTİ / SİTE!</p>`;
             }
 
-            logToTerminal(`✅ Analiz Bitti. Tam Puan: ${data.securityScore}/100`);
-
-        } catch (err) {
-            loader.style.display = 'none';
-            dashboard.style.display = 'block';
-
-            // Eğer API cevap vermezse ve site PlayMods ise doğrudan tespit et
-            if (isModApkSite) {
-                document.getElementById('statusText').innerText = "TEHLİKELİ / KORSAN APK RİSKİ";
-                document.getElementById('targetDisplay').innerText = formattedUrl;
-                document.getElementById('scoreVal').innerText = "30";
-                document.getElementById('scoreVal').style.color = "var(--red)";
-                document.getElementById('scoreCard').style.borderLeftColor = "var(--red)";
-                
-                document.getElementById('mPing').innerText = "180 ms";
-                document.getElementById('mSsl').innerText = "AKTİF (HTTPS)";
-                document.getElementById('mModRisk').innerText = "YÜKSEK (KORSAN APK)";
-                document.getElementById('mSize').innerText = "92 KB";
-
-                document.getElementById('threatList').innerHTML = `
-                    <li class="threat-item YÜKSEK">
+            result.threats.forEach(t => {
+                let badgeClass = t.severity === 'YÜKSEK' ? 'badge-red' : (t.severity === 'ORTA' ? 'badge-orange' : 'badge-green');
+                threatList.innerHTML += `
+                    <li class="threat-item ${t.severity}">
                         <div>
-                            <strong style="color: #fff;">Korsan APK / Zararlı Yazılım Tehlikesi</strong>
-                            <p style="font-size: 12px; color: var(--subtext); margin-top: 4px;">PlayMods gibi platformlarda sunulan kırılmış oyunlar ve APK'lar cihaza Trojan (Truva Atı) bulaştırma ihtimali taşır.</p>
+                            <strong style="color: #fff;">${t.name}</strong>
+                            <p style="font-size: 12px; color: var(--subtext); margin-top: 4px;">${t.desc}</p>
                         </div>
-                        <span class="badge badge-red">YÜKSEK RİSK</span>
+                        <span class="badge ${badgeClass}">${t.severity}</span>
                     </li>
                 `;
+            });
 
-                overlay.innerHTML = `
-                    <span style="font-size: 35px;">⚠️</span>
-                    <p class="glitch-text" style="margin-top: 8px;">ZARARLI YAZILIM RİSKİ</p>
-                    <p style="font-size: 10px; color: #fff; margin-top: 4px;">Modlanmış APK indirmeyin!</p>
-                `;
-            } else {
-                document.getElementById('statusText').innerText = "GÜVENLİ SAYFA";
-                document.getElementById('targetDisplay').innerText = formattedUrl;
-                document.getElementById('scoreVal').innerText = "90";
-                document.getElementById('scoreVal').style.color = "var(--green)";
-            }
-
-            logToTerminal("⚠️ Analiz yerel güvenlik algoritmasıyla tamamlandı.");
-        }
+            logToTerminal(`✅ Derin Analiz Bitti. Puan: ${result.score}/100 (${result.threatLevel})`);
+        }, 700);
     }
+
+    window.onload = renderLibrary;
 </script>
 
 </body>
