@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetSentinel // Siber Güvenlik Analiz Platformu</title>
+    <style>
+        :root {
+            --bg: #0b0f19;
+            --card-bg: #151c2c;
+            --accent: #00f2fe;
+            --green: #00ff88;
+            --red: #ff3366;
+            --orange: #ff9900;
+            --text: #c8d6e5;
+            --border: #222f3e;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Consolas', 'Segoe UI', monospace; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 0 40px rgba(0, 242, 254, 0.08);
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .brand h1 {
+            color: var(--accent);
+            font-size: 32px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+        }
+
+        .brand p { font-size: 13px; color: #8395a7; margin-top: 5px; }
+
+        .search-area {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            background: #0d131d;
+            border: 1px solid var(--border);
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 12px rgba(0, 242, 254, 0.2);
+        }
+
+        button {
+            background: linear-gradient(45deg, #00c6ff, #0072ff);
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 114, 255, 0.4);
+        }
+
+        .dashboard { display: none; }
+
+        .score-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0d131d;
+            padding: 20px 25px;
+            border-radius: 10px;
+            border-left: 5px solid var(--accent);
+            margin-bottom: 25px;
+        }
+
+        .score-box { text-align: right; }
+        .score-val { font-size: 36px; font-weight: bold; }
+
+        .grid-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .metric {
+            background: #0d131d;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .metric span { display: block; font-size: 11px; color: #8395a7; margin-bottom: 6px; }
+        .metric strong { font-size: 16px; color: #fff; }
+
+        .threat-title { font-size: 16px; margin-bottom: 12px; color: #fff; }
+
+        .threat-list { list-style: none; }
+
+        .threat-item {
+            background: #0d131d;
+            padding: 14px 18px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .threat-item.YÜKSEK { border-left: 4px solid var(--red); }
+        .threat-item.ORTA { border-left: 4px solid var(--orange); }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .badge-red { background: rgba(255, 51, 102, 0.2); color: var(--red); }
+        .badge-orange { background: rgba(255, 153, 0, 0.2); color: var(--orange); }
+
+        .loader {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            color: var(--accent);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="brand">
+        <h1>🛡️ NETSENTINEL</h1>
+        <p>GELİŞMİŞ WEB GÜVENLİK VE TEHDİT ANALİZ PLATFORMU</p>
+    </div>
+
+    <div class="search-area">
+        <input type="text" id="targetUrl" placeholder="Taranacak Web Adresi (Örn: example.com)">
+        <button onclick="runAnalysis()">ANALİZ ET</button>
+    </div>
+
+    <div class="loader" id="loader">
+        <p>⚡ NetSentinel taptaze verileri çekiyor ve kodları tarıyor...</p>
+    </div>
+
+    <div class="dashboard" id="dashboard">
+        <div class="score-card" id="scoreCard">
+            <div>
+                <h3 id="statusText" style="font-size: 20px;">-</h3>
+                <p id="targetDisplay" style="font-size: 12px; color: #8395a7; margin-top: 4px;">-</p>
+            </div>
+            <div class="score-box">
+                <div class="score-val" id="scoreVal">0</div>
+                <span style="font-size: 11px; color: #8395a7;">GÜVENLİK PUANI</span>
+            </div>
+        </div>
+
+        <div class="grid-metrics">
+            <div class="metric">
+                <span>YANIT SÜRESİ</span>
+                <strong id="mPing">-</strong>
+            </div>
+            <div class="metric">
+                <span>SSL SERTİFİKASI</span>
+                <strong id="mSsl">-</strong>
+            </div>
+            <div class="metric">
+                <span>SAYFA BOYUTU</span>
+                <strong id="mSize">-</strong>
+            </div>
+            <div class="metric">
+                <span>TOPLAM SCRIPT</span>
+                <strong id="mScripts">-</strong>
+            </div>
+        </div>
+
+        <h4 class="threat-title">Güvenlik Bulguları & Raporlar:</h4>
+        <ul class="threat-list" id="threatList"></ul>
+    </div>
+</div>
+
+<script>
+    async function runAnalysis() {
+        const url = document.getElementById('targetUrl').value;
+        const loader = document.getElementById('loader');
+        const dashboard = document.getElementById('dashboard');
+
+        if (!url) {
+            alert("Lütfen bir URL girin!");
+            return;
+        }
+
+        loader.style.display = 'block';
+        dashboard.style.display = 'none';
+
+        try {
+            const res = await fetch(`http://localhost:3000/api/scan?url=${encodeURIComponent(url)}`);
+            const data = await res.json();
+
+            loader.style.display = 'none';
+            dashboard.style.display = 'block';
+
+            if (data.error) {
+                alert(data.error);
+                return;
+            }
+
+            // Skor Paneli Güncelleme
+            document.getElementById('statusText').innerText = data.status;
+            document.getElementById('targetDisplay').innerText = data.targetUrl + " // " + data.timestamp;
+            
+            const scoreVal = document.getElementById('scoreVal');
+            scoreVal.innerText = data.securityScore;
+            
+            if (data.securityScore >= 85) scoreVal.style.color = "var(--green)";
+            else if (data.securityScore >= 60) scoreVal.style.color = "var(--orange)";
+            else scoreVal.style.color = "var(--red)";
+
+            // Metrikler
+            document.getElementById('mPing').innerText = data.metrics.responseTimeMs + " ms";
+            document.getElementById('mSsl').innerText = data.metrics.isHttps ? "VAR (HTTPS)" : "YOK (HTTP)";
+            document.getElementById('mSize').innerText = data.metrics.htmlSizeKb + " KB";
+            document.getElementById('mScripts').innerText = data.metrics.scriptCount + " Adet";
+
+            // Tehdit Listesi
+            const threatList = document.getElementById('threatList');
+            threatList.innerHTML = "";
+
+            if (data.detectedThreats.length === 0) {
+                threatList.innerHTML = `<li class="threat-item" style="border-left: 4px solid var(--green);">
+                    <span>✅ Sayfada herhangi bir bilinen tehdit, zararlı betik veya güvenlik ihlali bulunamadı.</span>
+                </li>`;
+            } else {
+                data.detectedThreats.forEach(t => {
+                    const badgeClass = t.severity === 'YÜKSEK' ? 'badge-red' : 'badge-orange';
+                    threatList.innerHTML += `
+                        <li class="threat-item ${t.severity}">
+                            <div>
+                                <strong>${t.threatName}</strong>
+                                <p style="font-size: 12px; color: #8395a7; margin-top: 3px;">${t.desc}</p>
+                            </div>
+                            <span class="badge ${badgeClass}">${t.severity}</span>
+                        </li>
+                    `;
+                });
+            }
+
+        } catch (err) {
+            loader.style.display = 'none';
+            alert("Sunucuya bağlanırken hata oluştu. 'node server.js' açık mı?");
+        }
+    }
+</script>
+
+</body>
+</html>
