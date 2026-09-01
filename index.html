@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NetSentinel // Siber Güvenlik Analiz Platformu</title>
+    <title>Securovo // Siber Güvenlik Analiz Platformu</title>
     <style>
         :root {
             --bg: #0b0f19;
@@ -166,7 +166,7 @@
 
 <div class="container">
     <div class="brand">
-        <h1>🛡️ NETSENTINEL</h1>
+        <h1>🛡️ SECUROVO</h1>
         <p>GELİŞMİŞ WEB GÜVENLİK VE TEHDİT ANALİZ PLATFORMU</p>
     </div>
 
@@ -176,7 +176,7 @@
     </div>
 
     <div class="loader" id="loader">
-        <p>⚡ NetSentinel taptaze verileri çekiyor ve kodları tarıyor...</p>
+        <p>⚡ Securovo taptaze verileri çekiyor ve kodları tarıyor...</p>
     </div>
 
     <div class="dashboard" id="dashboard">
@@ -230,7 +230,7 @@
         dashboard.style.display = 'none';
 
         try {
-            const res = await fetch(`http://localhost:3000/api/scan?url=${encodeURIComponent(url)}`);
+            const res = await fetch(`https://securovo-api.onrender.com/api/scan?url=${encodeURIComponent(url)}`);
             const data = await res.json();
 
             loader.style.display = 'none';
@@ -283,7 +283,7 @@
 
         } catch (err) {
             loader.style.display = 'none';
-            alert("Sunucuya bağlanırken hata oluştu. 'node server.js' açık mı?");
+            alert("Sunucuya bağlanırken hata oluştu. Lütfen canlı API bağlantısını kontrol edin.");
         }
     }
 </script>
