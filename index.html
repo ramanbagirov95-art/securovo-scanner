@@ -61,6 +61,7 @@
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
         }
 
+        /* --- ÜST HEADER VE KULLANICI PROFİL ALANI --- */
         .header-status {
             display: flex;
             justify-content: space-between;
@@ -68,6 +69,54 @@
             margin-bottom: 25px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             padding-bottom: 15px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            padding: 6px 14px 6px 8px;
+            border-radius: 30px;
+            transition: 0.3s ease;
+        }
+
+        .user-profile:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 12px var(--accent-glow);
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1.5px solid var(--accent);
+            box-shadow: 0 0 8px var(--accent-glow);
+            background: #0d131d;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .user-name {
+            font-size: 12px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .user-role {
+            font-size: 10px;
+            color: var(--subtext);
         }
 
         .system-badge {
@@ -282,7 +331,7 @@
 
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* --- SANAL SİMÜLATÖR PENCERESİ EKLENTİSİ --- */
+        /* --- SANAL SİMÜLATÖR PENCERESİ --- */
         .sim-section {
             width: 100%;
             max-width: 950px;
@@ -294,8 +343,8 @@
         }
 
         .sim-phone {
-            width: 280px;
-            height: 480px;
+            width: 300px;
+            height: 500px;
             background: #000;
             border: 4px solid #333;
             border-radius: 30px;
@@ -318,11 +367,25 @@
             align-items: center;
             justify-content: center;
             gap: 15px;
+            word-break: break-all;
+        }
+
+        .url-tag {
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            max-width: 90%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .glitch-text {
             color: var(--red);
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             animation: blink 0.5s infinite;
         }
@@ -334,10 +397,21 @@
 
 <div class="container">
     <div class="header-status">
-        <span style="font-size: 12px; color: var(--subtext);">SECUROVO v2.0 // COMMAND CENTER</span>
-        <div class="system-badge">
-            <div class="pulse-dot"></div>
-            SYSTEM ONLINE
+        <div class="header-left">
+            <span style="font-size: 12px; color: var(--subtext);">SECUROVO v2.0</span>
+            <div class="system-badge">
+                <div class="pulse-dot"></div>
+                SYSTEM ONLINE
+            </div>
+        </div>
+
+        <!-- Kullanıcı Profil Kartı -->
+        <div class="user-profile">
+            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=SecurovoUser" alt="Avatar" class="user-avatar">
+            <div class="user-info">
+                <span class="user-name">Analist Gulzar</span>
+                <span class="user-role">Siber Güvenlik Uzmanı</span>
+            </div>
         </div>
     </div>
 
@@ -400,16 +474,16 @@
     </div>
 </div>
 
-<!-- SANAL APK & TEHDİT SİMÜLATÖRÜ PENCERESİ -->
+<!-- SANAL APK & TEHDİT SİMÜLASYON SCRIPT'İ -->
 <div class="sim-section">
-    <h3 style="color: var(--accent); font-size: 18px; margin-bottom: 8px;">📱 Sanal Tehdit & APK Simülatörü</h3>
-    <p style="font-size: 12px; color: var(--subtext);">Güvensiz bir siteden veya APK indirildiğinde cihazınızda neler yaşanabileceğini %100 güvenli ortamda görün.</p>
+    <h3 style="color: var(--accent); font-size: 18px; margin-bottom: 8px;">📱 Sanal Tehdit & Canlı URL Simülatörü</h3>
+    <p style="font-size: 12px; color: var(--subtext);">Girdiğiniz adresten gelebilecek sahte indirme ve izin tehditlerini güvenli ortamda simüle edin.</p>
     
     <div class="sim-phone">
         <div class="sim-screen" id="simScreen">
             <span style="font-size: 40px;">📲</span>
             <p style="font-size: 13px; color: var(--subtext);">Sanal Telefon Hazır</p>
-            <button onclick="startApkSim()" style="padding: 10px 18px; font-size: 12px;">Zararlı APK İndirme Simülasyonunu Başlat</button>
+            <button onclick="startApkSim()" style="padding: 10px 18px; font-size: 12px;">Simülasyonu Başlat</button>
         </div>
     </div>
 </div>
@@ -456,7 +530,6 @@
             else if (data.securityScore >= 60) scoreVal.style.color = "var(--orange)";
             else {
                 scoreVal.style.color = "var(--red)";
-                // Eğer site güvensizse otomatik simülasyonu çalıştır uyarısı
                 alert("⚠️ Dikkat: Bu site güvensiz bulundu! Aşağıdaki Sanal Simülatörden muhtemel riskleri görebilirsiniz.");
             }
 
@@ -495,42 +568,50 @@
         }
     }
 
-    // SANAL TEHDİT & APK SİMÜLASYON SCRIPT'İ
+    // DINAMIK SANAL TEHDİT & URL SİMÜLASYONU
     function startApkSim() {
         const screen = document.getElementById('simScreen');
+        let currentUrl = document.getElementById('targetUrl').value.trim();
         
-        // 1. AŞAMA: İndirme
+        if (!currentUrl) {
+            currentUrl = "example-malware-site.com";
+        }
+        
+        // 1. AŞAMA: İndirme (Dinamik URL ile)
         screen.innerHTML = `
-            <div class="cyber-spinner" style="width: 35px; height: 35px;"></div>
-            <p style="font-size: 12px; color: var(--orange);">📥 free_game_v2.apk İndiriliyor...</p>
+            <div class="url-tag">🌐 ${currentUrl}</div>
+            <div class="cyber-spinner" style="width: 35px; height: 35px; margin-bottom: 5px;"></div>
+            <p style="font-size: 11px; color: var(--orange);">📥 payload_setup.apk İndiriliyor...</p>
         `;
 
-        // 2. AŞAMA: İzinler
+        // 2. AŞAMA: İzin İstemeleri
         setTimeout(() => {
             screen.innerHTML = `
-                <span style="font-size: 30px;">⚠️</span>
-                <p style="font-size: 12px; color: #fff;"><strong>Sahte Uygulama İzin İstiyor:</strong></p>
-                <p style="font-size: 10px; color: var(--subtext);">• Kamera & Mikrofon<br>• SMS Okuma<br>• Tüm Dosyalara Erişim</p>
-                <p style="font-size: 11px; color: var(--red); margin-top: 5px;">Arka planda kuruluyor...</p>
+                <div class="url-tag">🌐 ${currentUrl}</div>
+                <span style="font-size: 26px;">⚠️</span>
+                <p style="font-size: 11px; color: #fff;"><strong>Sahte İzin Talebi:</strong></p>
+                <p style="font-size: 10px; color: var(--subtext);">• SMS ve Çağrı Geçmişi<br>• Kamera & Arka Plan Kaydı<br>• Cihaz Yöneticisi Erişimi</p>
+                <p style="font-size: 10px; color: var(--red);">Sızma İşlemi Başlatıldı...</p>
             `;
         }, 3000);
 
-        // 3. AŞAMA: Virüs Uyarısı / Tehdit
+        // 3. AŞAMA: Zararlı Kod ve Virüs Efekti
         setTimeout(() => {
             screen.innerHTML = `
-                <span style="font-size: 40px;">☠️</span>
-                <p class="glitch-text">SİSTEM ENFEKTE OLDU!</p>
-                <p style="font-size: 10px; color: #fff;">Trojan/Ransomware tespit edildi. Dosyalar şifrelendi!</p>
+                <div class="url-tag">🌐 ${currentUrl}</div>
+                <span style="font-size: 35px;">☠️</span>
+                <p class="glitch-text">TEHDİT GERÇEKLEŞTİ!</p>
+                <p style="font-size: 10px; color: #fff;">${currentUrl} adresi üzerinden cihaza sızıldı ve veriler kilitlendi!</p>
             `;
         }, 6500);
 
-        // 4. AŞAMA: Sıfırlama ve Bilgilendirme
+        // 4. AŞAMA: Tamamlama ve Bilgilendirme
         setTimeout(() => {
             screen.innerHTML = `
-                <span style="font-size: 35px;">✅</span>
-                <p style="font-size: 12px; color: var(--green);"><strong>Sanal Test Tamamlandı</strong></p>
-                <p style="font-size: 10px; color: var(--subtext); padding: 0 10px;">Gerçek cihazınıza hiçbir zarar gelmedi. Güvensiz APK'lar işte bu şekilde cihazınıza erişim sağlar!</p>
-                <button onclick="startApkSim()" style="padding: 8px 14px; font-size: 11px; margin-top: 10px;">Tekrar Dene</button>
+                <span style="font-size: 30px;">🛡️</span>
+                <p style="font-size: 11px; color: var(--green);"><strong>Simülasyon Bitti</strong></p>
+                <p style="font-size: 9px; color: var(--subtext); padding: 0 5px;">${currentUrl} gibi şüpheli adreslerden indirilen dosyalar bu tür zararlılara yol açabilir.</p>
+                <button onclick="startApkSim()" style="padding: 6px 12px; font-size: 10px; margin-top: 5px;">Yeniden Başlat</button>
             `;
         }, 10500);
     }
