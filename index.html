@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="https://img.icons8.com/fluency/48/shield.png">
-    <title>Securovo // Advanced AI Cyber Command Center</title>
+    <title>Viroxa // Advanced AI Cyber Command Center</title>
     <style>
         :root {
             --bg: #030712;
@@ -87,7 +87,6 @@
         .brand h1 span { color: var(--accent); }
         .brand p { font-size: 12px; color: var(--subtext); margin-top: 6px; }
 
-        /* YENİ: Roblox Filtre Switch Stilleri */
         .controls-bar {
             display: flex;
             justify-content: space-between;
@@ -219,7 +218,6 @@
 
         .dashboard { display: none; }
 
-        /* YENİ: Dairesel Grafik Görselli Score Card */
         .score-card {
             display: flex;
             justify-content: space-between;
@@ -397,16 +395,15 @@
 
 <div class="container">
     <div class="header-status">
-        <span style="font-size: 12px; color: var(--subtext);">SECUROVO v10.0 // FULL SUITE CYBER HUB</span>
+        <span style="font-size: 12px; color: var(--subtext);">VIROXA v10.0 // FULL SUITE CYBER HUB</span>
         <div class="system-badge"><div class="pulse-dot"></div> AI ENGINE & TOOLKIT ACTIVE</div>
     </div>
 
     <div class="brand">
-        <h1>🛡️ <span>SECUROVO</span></h1>
+        <h1>🛡️ <span>VIROXA</span></h1>
         <p>Otomatik URL Temizleme, Dairesel Risk Grafiği ve Roblox Tehdit Koruması</p>
     </div>
 
-    <!-- YENİ: Kontrol Çubuğu & Roblox Filtre Switch'i -->
     <div class="controls-bar">
         <div class="toggle-container">
             <label class="switch">
@@ -459,7 +456,6 @@
     </div>
 
     <div class="dashboard" id="dashboard">
-        <!-- YENİ: Dairesel Risk Göstergeli Score Card -->
         <div class="score-card" id="scoreCard">
             <div>
                 <h3 id="statusText" style="font-size: 22px; color: #fff;">-</h3>
@@ -480,7 +476,6 @@
         <div class="ai-analysis-card">
             <div class="ai-card-title">
                 <span>🤖 AI GÜVENLİK ANALİZ RAPORU</span>
-                <!-- YENİ: Raporu Kopyala Butonu -->
                 <button class="btn-copy-report" onclick="copySecurityReport()">📋 Raporu Kopyala</button>
             </div>
             <div class="ai-card-desc" id="aiAssessmentText" style="font-size: 13px; line-height: 1.6;">Analiz ediliyor...</div>
@@ -517,12 +512,12 @@
     </div>
 
     <div class="terminal-log" id="terminalLog">
-        [SECUROVO v10] Siber güvenlik sistemi ve canlı URL temizleyici aktif.
+        [VIROXA v10] Siber güvenlik sistemi ve canlı URL temizleyici aktif.
     </div>
 </div>
 
 <footer style="margin-top: 30px; margin-bottom: 20px; text-align: center; font-size: 11px; color: var(--subtext); max-width: 800px;">
-    <p>⚠️ <strong>Yasal Sorumluluk Reddi:</strong> Securovo bir siber güvenlik simülatörüdür. Gösterilen skorlar sezgisel algoritmalarla üretilir.</p>
+    <p>⚠️ <strong>Yasal Sorumluluk Reddi:</strong> Viroxa bir siber güvenlik simülatörüdür. Gösterilen skorlar sezgisel algoritmalarla üretilir.</p>
 </footer>
 
 <script>
@@ -532,15 +527,15 @@
         { domain: "google.com", type: "Güvenli / Onaylı", reason: "Resmi Arama Motoru" }
     ];
 
-    let currentAnalysisData = null; // Rapor kopyalama için veriyi saklar
+    let currentAnalysisData = null;
 
     function getLibrary() {
-        const stored = localStorage.getItem('securovo_lib');
+        const stored = localStorage.getItem('viroxa_lib');
         return stored ? JSON.parse(stored) : defaultLibrary;
     }
 
     function saveLibrary(lib) {
-        localStorage.setItem('securovo_lib', JSON.stringify(lib));
+        localStorage.setItem('viroxa_lib', JSON.stringify(lib));
         renderLibrary();
     }
 
@@ -568,16 +563,13 @@
         });
     }
 
-    // YENİ ÖZELLİK 2: Otomatik URL Doğrulayıcı & Temizleyici
     function autoCleanInput(inputEl) {
         let val = inputEl.value;
         
-        // 1. Yazım hatalarını düzelt
         val = val.replace(/^http\/\//i, "http://");
         val = val.replace(/^https\/\//i, "https://");
-        val = val.replace(/\s+/g, ''); // Aradaki boşlukları sil
+        val = val.replace(/\s+/g, '');
 
-        // 2. Gereksiz takip parametrelerini (utm_source, ref vb.) temizle
         if (val.includes('?utm_') || val.includes('&utm_') || val.includes('?ref=')) {
             val = val.split('?')[0];
             logToTerminal("⚡ Canlı URL Temizleyici: Gereksiz takip parametreleri silindi!");
@@ -631,11 +623,10 @@
         runAnalysis();
     }
 
-    // YENİ ÖZELLİK 3: Rapor Kopyalama Metin Çıktısı
     function copySecurityReport() {
         if (!currentAnalysisData) return;
 
-        const reportText = `[SECUROVO SİBER GÜVENLİK RAPORU]
+        const reportText = `[VIROXA SİBER GÜVENLİK RAPORU]
 ------------------------------------
 🎯 Hedef Adres: ${currentAnalysisData.url}
 🛡️ Güvenlik Skoru: %${currentAnalysisData.score}/100
@@ -643,14 +634,13 @@
 🔍 Durum: ${currentAnalysisData.status}
 ------------------------------------
 ⚠️ AI Değerlendirmesi: ${currentAnalysisData.rawReason}
-⚡ Securovo Cyber Hub tarafından taranmıştır.`;
+⚡ Viroxa Cyber Hub tarafından taranmıştır.`;
 
         navigator.clipboard.writeText(reportText).then(() => {
             alert("📋 Güvenlik Raporu panoya kopyalandı! İstediğin yere yapıştırabilirsin.");
         });
     }
 
-    // YENİ ÖZELLİK 5: Roblox & Oyun Ekosistem Filtreli Analiz Motoru
     function aiFullAnalysis(url) {
         const fullUrl = url.toLowerCase();
         const cleanUrl = fullUrl.replace(/(http:\/\/|https:\/\/|www\.)/g, '').split('/')[0];
@@ -666,7 +656,6 @@
         let threats = [];
         let aiReasons = [];
 
-        // ROBLOX & OYUN FİLTRESİ
         if (robloxProtectionActive) {
             if (/robux|rbx|cookie-stealer|cookie-grabber|bloxlink-fake|ro-py|account-steal/i.test(fullUrl)) {
                 score -= 75;
@@ -679,14 +668,12 @@
             }
         }
 
-        // Topluluk Kaydı
         if (libMatch && libMatch.type.includes("İnceleme Bekliyor")) {
             score -= 40;
             threats.push({ name: "Topluluk Şüpheli Adres Bildirimi", desc: `Gerekçe: "${libMatch.reason}"`, severity: "ORTA" });
             aiReasons.push("Topluluk tarafından şüpheli olarak bildirilmiş.");
         }
 
-        // Phishing & Mod APK
         if (/free-gems|unlimited-hack|account-verify/i.test(fullUrl)) {
             score -= 60;
             threats.push({ name: "Phishing / Oltalama", desc: "Ücretsiz eşya vaadiyle şifre çalma riski.", severity: "YÜKSEK" });
@@ -735,7 +722,6 @@
             document.getElementById('scoreVal').innerText = result.score;
             document.getElementById('aiAssessmentText').innerHTML = result.aiReasonText;
 
-            // YENİ ÖZELLİK 4: Dairesel Risk Göstergesi Animasyonu
             const circle = document.getElementById('circleProgress');
             circle.setAttribute('stroke-dasharray', `${result.score}, 100`);
 
