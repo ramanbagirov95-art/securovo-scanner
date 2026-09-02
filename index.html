@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="https://img.icons8.com/fluency/48/shield.png">
-    <title>VIROXA // Enterprise & Creator Cyber Command Center</title>
+    <title>Viroxa // Advanced AI Cyber Command Center</title>
     <style>
         :root {
             --bg: #030712;
-            --card-bg: rgba(11, 19, 36, 0.88);
+            --card-bg: rgba(13, 22, 38, 0.85);
             --accent: #00f2fe;
             --purple: #9d4edd;
-            --purple-glow: rgba(157, 78, 221, 0.5);
-            --gold: #ffb703;
+            --purple-glow: rgba(157, 78, 221, 0.6);
             --green: #00ff88;
             --red: #ff3366;
             --orange: #ff9900;
@@ -26,414 +25,743 @@
         body {
             background-color: var(--bg);
             background-image: 
-                radial-gradient(circle at 15% 15%, rgba(0, 242, 254, 0.12) 0%, transparent 45%),
-                radial-gradient(circle at 85% 85%, rgba(157, 78, 221, 0.15) 0%, transparent 45%),
-                radial-gradient(circle at 50% 50%, rgba(255, 183, 3, 0.05) 0%, transparent 60%);
+                radial-gradient(circle at 10% 20%, rgba(0, 242, 254, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 90% 80%, rgba(157, 78, 221, 0.15) 0%, transparent 45%);
             color: var(--text);
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            padding: 25px 15px;
+            padding: 20px;
         }
 
         .container {
             width: 100%;
-            max-width: 1100px;
+            max-width: 1000px;
             background: var(--card-bg);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(16px);
             border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 40px;
-            box-shadow: 0 0 80px rgba(0, 0, 0, 0.9);
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
             margin-bottom: 30px;
         }
 
-        .top-nav {
+        .header-status {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding-bottom: 18px;
+            padding-bottom: 15px;
         }
 
-        .brand-logo {
-            display: flex;
+        .system-badge {
+            display: inline-flex;
             align-items: center;
-            gap: 12px;
-        }
-
-        .brand-logo h1 {
-            font-size: 32px;
-            letter-spacing: 4px;
-            color: #fff;
-        }
-
-        .brand-logo h1 span { color: var(--accent); }
-
-        .system-status {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .creator-badge {
-            background: rgba(255, 183, 3, 0.12);
-            border: 1px solid var(--gold);
-            color: var(--gold);
+            gap: 8px;
+            background: rgba(157, 78, 221, 0.15);
+            border: 1px solid rgba(157, 78, 221, 0.5);
+            color: #d8b4fe;
             padding: 6px 14px;
             border-radius: 20px;
             font-size: 11px;
             font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 6px;
         }
 
         .pulse-dot {
             width: 8px; height: 8px;
-            background-color: var(--green);
+            background-color: var(--purple);
             border-radius: 50%;
             animation: pulse 1.5s infinite;
         }
 
         @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 255, 136, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(157, 78, 221, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(157, 78, 221, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(157, 78, 221, 0); }
         }
 
-        .banner-creator {
-            background: linear-gradient(135deg, rgba(157, 78, 221, 0.2), rgba(0, 242, 254, 0.1));
-            border: 1px solid rgba(157, 78, 221, 0.4);
-            border-radius: 16px;
-            padding: 16px 20px;
-            margin-bottom: 25px;
+        .brand { text-align: center; margin-bottom: 25px; }
+        .brand h1 { color: #fff; font-size: 38px; letter-spacing: 5px; }
+        .brand h1 span { color: var(--accent); }
+        .brand p { font-size: 12px; color: var(--subtext); margin-top: 6px; }
+
+        .controls-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 12px;
+            background: rgba(5, 10, 20, 0.6);
+            padding: 10px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .banner-creator-text h3 { font-size: 15px; color: #fff; margin-bottom: 4px; }
-        .banner-creator-text p { font-size: 12px; color: var(--subtext); }
-
-        .search-container { margin-bottom: 25px; }
-
-        .search-box {
+        .toggle-container {
             display: flex;
-            gap: 12px;
-            background: rgba(5, 10, 20, 0.8);
-            padding: 8px;
-            border-radius: 16px;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+            color: #d8b4fe;
+            font-weight: bold;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 22px;
+        }
+
+        .switch input { opacity: 0; width: 0; height: 0; }
+
+        .slider {
+            position: absolute; cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #2a2d3d;
+            transition: .4s;
+            border-radius: 22px;
             border: 1px solid var(--border);
         }
 
-        .search-box input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            padding: 12px 16px;
+        .slider:before {
+            position: absolute; content: "";
+            height: 14px; width: 14px;
+            left: 3px; bottom: 3px;
+            background-color: #fff;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider { background-color: var(--purple); }
+        input:checked + .slider:before { transform: translateX(22px); }
+
+        .search-area { display: flex; gap: 12px; margin-bottom: 10px; }
+
+        input[type="text"], select {
+            background: rgba(5, 10, 20, 0.9);
+            border: 1px solid var(--border);
+            padding: 14px 18px;
+            border-radius: 12px;
             color: #fff;
-            font-size: 15px;
+            font-size: 14px;
             outline: none;
         }
 
-        .search-box button {
-            background: linear-gradient(135deg, #00f2fe, #9d4edd);
-            color: #000;
-            font-weight: bold;
+        input[type="text"] { flex: 1; }
+
+        button {
+            background: linear-gradient(135deg, #7928ca, #00dfd8);
+            color: #fff;
             border: none;
-            padding: 12px 28px;
+            padding: 14px 24px;
             border-radius: 12px;
+            font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
-            font-size: 13px;
         }
 
-        .search-box button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 25px var(--purple-glow);
-            color: #fff;
+        button:hover { transform: translateY(-2px); box-shadow: 0 6px 30px var(--purple-glow); }
+
+        .report-section {
+            background: rgba(255, 51, 102, 0.05);
+            border: 1px dashed rgba(255, 51, 102, 0.4);
+            border-radius: 14px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
         }
 
-        .filter-tags {
+        .report-header {
             display: flex;
+            align-items: center;
             gap: 10px;
-            margin-top: 12px;
+            color: var(--red);
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
 
-        .filter-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--subtext);
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 11px;
-            cursor: pointer;
-        }
+        .report-form { display: flex; gap: 10px; }
 
-        .filter-btn.active {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: rgba(0, 242, 254, 0.1);
-        }
-
-        .dashboard { display: none; }
-
-        .score-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 20px;
-            margin-bottom: 25px;
-        }
-
-        .card {
+        .library-section {
             background: rgba(5, 10, 20, 0.7);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 24px;
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 20px;
         }
 
-        .ai-status-title {
+        .library-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
         }
 
-        .ai-status-title h3 { font-size: 18px; color: #fff; }
+        .library-title { font-size: 13px; font-weight: bold; color: var(--accent); }
+        .add-form { display: flex; gap: 10px; margin-bottom: 15px; }
+        .library-tags { display: flex; flex-wrap: wrap; gap: 8px; }
 
-        .score-gauge-box {
+        .tag-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 11px;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            text-align: center;
+            gap: 8px;
         }
 
-        .gauge-val {
-            font-size: 42px;
+        .tag-delete { color: var(--red); cursor: pointer; font-weight: bold; }
+
+        .dashboard { display: none; }
+
+        .score-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 10, 20, 0.9);
+            padding: 20px 30px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            border-left: 6px solid var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .circular-chart {
+            width: 90px;
+            height: 90px;
+            position: relative;
+        }
+
+        .circle-bg { fill: none; stroke: rgba(255, 255, 255, 0.1); stroke-width: 3.8; }
+        .circle {
+            fill: none;
+            stroke-width: 3.8;
+            stroke-linecap: round;
+            stroke: var(--accent);
+            transition: stroke-dasharray 1s ease, stroke 0.5s ease;
+        }
+
+        .chart-text {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 22px;
             font-weight: bold;
-            color: var(--accent);
-            margin-top: -10px;
+            color: #fff;
         }
 
-        .metrics-bar {
+        .ai-analysis-card {
+            background: rgba(157, 78, 221, 0.08);
+            border: 1px solid rgba(157, 78, 221, 0.3);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .ai-card-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #d8b4fe;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .btn-copy-report {
+            background: rgba(0, 242, 254, 0.15);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .btn-copy-report:hover { background: var(--accent); color: #000; }
+
+        .grid-metrics {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 15px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
-        .metric-card {
-            background: rgba(5, 10, 20, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
+        .metric {
+            background: rgba(5, 10, 20, 0.7);
             padding: 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
             text-align: center;
         }
 
-        .metric-card span { display: block; font-size: 11px; color: var(--subtext); margin-bottom: 6px; }
-        .metric-card strong { font-size: 14px; color: #fff; }
+        .metric span { display: block; font-size: 11px; color: var(--subtext); margin-bottom: 6px; }
+        .metric strong { font-size: 15px; color: #fff; }
 
+        .threat-title { font-size: 15px; margin-bottom: 12px; color: #fff; }
         .threat-list { list-style: none; }
+
         .threat-item {
-            background: rgba(5, 10, 20, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(5, 10, 20, 0.7);
             padding: 14px 18px;
             border-radius: 12px;
             margin-bottom: 10px;
+            border: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .threat-item.HIGH { border-left: 4px solid var(--red); }
-        .threat-item.MEDIUM { border-left: 4px solid var(--orange); }
-        .threat-item.SAFE { border-left: 4px solid var(--green); }
 
-        .loader { display: none; text-align: center; padding: 40px; }
+        .threat-item.YÜKSEK { border-left: 5px solid var(--red); }
+        .threat-item.ORTA { border-left: 5px solid var(--orange); }
+        .threat-item.DÜŞÜK { border-left: 5px solid var(--green); }
+
+        .badge { padding: 5px 12px; border-radius: 6px; font-size: 10px; font-weight: bold; }
+        .badge-red { background: rgba(255, 51, 102, 0.2); color: var(--red); border: 1px solid var(--red); }
+        .badge-orange { background: rgba(255, 153, 0, 0.2); color: var(--orange); border: 1px solid var(--orange); }
+        .badge-green { background: rgba(0, 255, 136, 0.2); color: var(--green); border: 1px solid var(--green); }
+
+        .loader { display: none; text-align: center; padding: 30px; color: var(--purple); }
         .cyber-spinner {
-            width: 50px; height: 50px;
-            border: 4px solid rgba(0, 242, 254, 0.1);
-            border-top: 4px solid var(--accent);
+            width: 45px; height: 45px;
+            border: 4px solid rgba(157, 78, 221, 0.1);
+            border-top: 4px solid var(--purple);
             border-radius: 50%;
             margin: 0 auto 15px auto;
             animation: spin 0.8s linear infinite;
         }
+
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        .btn-export {
-            background: rgba(255, 183, 3, 0.15);
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 12px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.2s;
+        .sim-section {
+            width: 100%;
+            max-width: 1000px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
         }
-        .btn-export:hover { background: var(--gold); color: #000; }
+
+        .sim-phone {
+            width: 310px;
+            height: 480px;
+            background: #000;
+            border: 6px solid #222;
+            border-radius: 32px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sim-browser-bar {
+            background: #111;
+            padding: 20px 10px 8px 10px;
+            border-bottom: 1px solid #333;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .sim-url-input {
+            flex: 1; background: #222; border: 1px solid #444; color: var(--accent);
+            padding: 4px 10px; border-radius: 6px; font-size: 10px; text-align: left;
+            overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+        }
+
+        .sim-screen-container { flex: 1; position: relative; width: 100%; height: 100%; background: #000; }
+        .sim-iframe { width: 100%; height: 100%; border: none; opacity: 0.8; }
+
+        .sim-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); display: flex; flex-direction: column;
+            justify-content: center; align-items: center; padding: 20px;
+        }
+
+        .terminal-log {
+            background: rgba(0,0,0,0.9); border: 1px solid var(--border);
+            border-radius: 10px; padding: 10px; font-size: 11px; color: var(--green);
+            text-align: left; height: 90px; overflow-y: auto; max-width: 600px; margin: 15px auto 0 auto;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="top-nav">
-        <div class="brand-logo">
-            <img src="https://img.icons8.com/fluency/48/shield.png" width="36" alt="Viroxa Shield">
-            <h1>VIROXA <span>ENTERPRISE</span></h1>
+    <div class="header-status">
+        <span style="font-size: 12px; color: var(--subtext);">VIROXA v10.0 // FULL SUITE CYBER HUB</span>
+        <div class="system-badge"><div class="pulse-dot"></div> AI ENGINE & TOOLKIT ACTIVE</div>
+    </div>
+
+    <div class="brand">
+        <h1>🛡️ <span>VIROXA</span></h1>
+        <p>Otomatik URL Temizleme, Dairesel Risk Grafiği ve Roblox Tehdit Koruması</p>
+    </div>
+
+    <div class="controls-bar">
+        <div class="toggle-container">
+            <label class="switch">
+                <input type="checkbox" id="robloxFilterToggle" checked>
+                <span class="slider"></span>
+            </label>
+            <span>🎮 Roblox & Oyun Ekosistemi Koruması (Cookie Stealer / Robux Tuzağı Filtresi)</span>
         </div>
-        <div class="system-status">
-            <div class="creator-badge">🎬 MİRAÇ MİRZA & CREATOR EDITION</div>
-            <div style="display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--subtext);">
-                <div class="pulse-dot"></div> AI KORUMASI AKTİF
-            </div>
+        <span style="font-size: 10px; color: var(--subtext);" id="cleanNotice">⚡ Canlı URL Temizleyici Aktif</span>
+    </div>
+
+    <div class="search-section">
+        <div class="search-area">
+            <input type="text" id="targetUrl" placeholder="Adres veya eklenti linki yapıştırın (Örn: http//bad-site.com?utm_source=test)..." oninput="autoCleanInput(this)">
+            <button onclick="runAnalysis()">GÜVENLİK TARAMASI</button>
         </div>
     </div>
 
-    <div class="banner-creator">
-        <div class="banner-creator-text">
-            <h3>🎮 İçerik Üreticileri & Roblox Oyuncuları İçin Koruma</h3>
-            <p>Miraç Mirza ve tüm topluluk için sahte Robux linkleri, zararlı plugin'ler ve cookie çalıcılar anında taranır.</p>
+    <div class="report-section">
+        <div class="report-header">🚨 Topluluk Tehdit Bildirimi</div>
+        <div class="report-form">
+            <input type="text" id="reportDomainInput" placeholder="Şüpheli Site / Eklenti Linki" style="flex: 1.5;">
+            <input type="text" id="reportReasonInput" placeholder="Neden şüpheli? (Örn: Cookie çalıcı şüphesi)" style="flex: 2;">
+            <button onclick="submitCommunityReport()" style="background: linear-gradient(135deg, #ff3366, #ff9900); font-size: 11px;">🚨 Bildir</button>
         </div>
-        <button class="btn-export" onclick="enableCreatorMode()">🎬 Modatör Modu</button>
     </div>
 
-    <div class="search-container">
-        <div class="search-box">
-            <input type="text" id="targetUrl" placeholder="İncelenecek web sitesi, Roblox asset linki veya eklenti adresi yapıştırın..." oninput="autoClean(this)">
-            <button onclick="startCyberScan()">GÜVENLİK ANALİZİ BAŞLAT</button>
+    <div class="library-section">
+        <div class="library-header">
+            <span class="library-title">📚 AI Tehdit Kütüphanesi</span>
+            <span style="font-size: 11px; color: var(--subtext);" id="libCount">0 Adres Kayıtlı</span>
         </div>
-        <div class="filter-tags">
-            <button class="filter-btn active" onclick="setMode('all')">🌐 Genel Web</button>
-            <button class="filter-btn" onclick="setMode('roblox')">🎮 Roblox Asset / Plugin</button>
-            <button class="filter-btn" onclick="setMode('discord')">💬 Discord Bot / Webhook</button>
+
+        <div class="add-form">
+            <input type="text" id="newDomainInput" placeholder="Manuel Domain ekleyin...">
+            <select id="newTypeSelect">
+                <option value="Korsan APK / Mod">Korsan APK / Mod</option>
+                <option value="Oltalama / Phishing">Oltalama / Phishing</option>
+                <option value="Güvenli / Onaylı">Güvenli / Onaylı</option>
+            </select>
+            <button onclick="addDomainToLibrary()" style="font-size: 11px;">+ Ekle</button>
         </div>
+
+        <div class="library-tags" id="libraryContainer"></div>
     </div>
 
     <div class="loader" id="loader">
         <div class="cyber-spinner"></div>
-        <p style="color: var(--accent); font-size: 13px;">🤖 VIROXA AI: Sezgisel Kod Yapısı ve Tehdit Katmanları İncelemede...</p>
+        <p id="loaderText">🤖 AI Taraması: URL Kod Yapısı, SSL Sezgiseli ve Oyun Tehditleri İnceleniyor...</p>
     </div>
 
     <div class="dashboard" id="dashboard">
-        <div class="score-grid">
-            <div class="card">
-                <div class="ai-status-title">
-                    <h3 id="statusTitle">GÜVENLİ SAYFA TESPİT EDİLDİ</h3>
-                    <button class="btn-export" onclick="copyReport()">📋 Raporu Kopyala</button>
-                </div>
-                <p id="targetUrlDisplay" style="font-size: 12px; color: var(--subtext); margin-bottom: 15px;">-</p>
-                <div id="aiSummary" style="font-size: 13px; line-height: 1.6; color: var(--text);">
-                    Analiz tamamlandı. Herhangi bir zararlı aktiviteye rastlanmadı.
-                </div>
+        <div class="score-card" id="scoreCard">
+            <div>
+                <h3 id="statusText" style="font-size: 22px; color: #fff;">-</h3>
+                <p id="targetDisplay" style="font-size: 12px; color: var(--subtext); margin-top: 4px;">-</p>
             </div>
-
-            <div class="card score-gauge-box">
-                <span style="font-size: 11px; color: var(--subtext); margin-bottom: 10px;">GÜVENLİK ENDEKSİ</span>
-                <div class="gauge-val" id="scoreValue">95</div>
-                <span style="font-size: 11px; color: var(--green); margin-top: 5px;" id="scoreLabel">DÜŞÜK RİSK</span>
+            
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div class="circular-chart">
+                    <svg viewBox="0 0 36 36" style="width: 100%; height: 100%;">
+                        <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        <path class="circle" id="circleProgress" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    </svg>
+                    <div class="chart-text" id="scoreVal">0</div>
+                </div>
             </div>
         </div>
 
-        <div class="metrics-bar">
-            <div class="metric-card"><span>TEHDİT SEVİYESİ</span><strong id="mThreat">DÜŞÜK</strong></div>
-            <div class="metric-card"><span>ROBLOX FİLTRESİ</span><strong id="mRoblox">TEMİZ</strong></div>
-            <div class="metric-card"><span>SSL & DOMAIN</span><strong id="mSSL">DOĞRULANDI</strong></div>
-            <div class="metric-card"><span>MİRAÇ MİRZA KORUMASI</span><strong id="mCreator">AKTİF</strong></div>
+        <div class="ai-analysis-card">
+            <div class="ai-card-title">
+                <span>🤖 AI GÜVENLİK ANALİZ RAPORU</span>
+                <button class="btn-copy-report" onclick="copySecurityReport()">📋 Raporu Kopyala</button>
+            </div>
+            <div class="ai-card-desc" id="aiAssessmentText" style="font-size: 13px; line-height: 1.6;">Analiz ediliyor...</div>
         </div>
 
-        <h4 style="font-size: 14px; margin-bottom: 12px; color: #fff;">📋 Tehdit ve Risk Analiz Ayrıntıları:</h4>
+        <div class="grid-metrics">
+            <div class="metric"><span>TEHDİT SEVİYESİ</span><strong id="mThreatLevel">-</strong></div>
+            <div class="metric"><span>TÜR / MAĞAZA</span><strong id="mStoreType">-</strong></div>
+            <div class="metric"><span>ROBLOX KORUMASI</span><strong id="mRobloxStatus">-</strong></div>
+            <div class="metric"><span>VERİ TABANI</span><strong id="mLibRecord">-</strong></div>
+        </div>
+
+        <h4 class="threat-title">📋 Tespit Edilen Risk Katmanları:</h4>
         <ul class="threat-list" id="threatList"></ul>
     </div>
 </div>
 
-<footer style="text-align: center; color: var(--subtext); font-size: 11px;">
-    Viroxa Cyber Intelligence Suite © 2026 // Miraç Mirza Community Edition
+<div class="sim-section">
+    <h3 style="color: var(--accent); font-size: 16px; margin-bottom: 8px;">📱 Canlı Web & Eklenti Önizlemesi</h3>
+    
+    <div class="sim-phone">
+        <div class="sim-browser-bar">
+            <span style="color: var(--subtext); font-size: 10px;">🔒</span>
+            <div class="sim-url-input" id="simUrlBar">https://google.com</div>
+        </div>
+        
+        <div class="sim-screen-container">
+            <iframe id="simIframe" class="sim-iframe" src="about:blank"></iframe>
+            <div class="sim-overlay" id="simOverlay">
+                <span style="font-size: 30px;">🌐</span>
+                <p style="font-size: 11px; color: #fff; margin-top: 8px;">AI Analizi Bekleniyor...</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="terminal-log" id="terminalLog">
+        [VIROXA v10] Siber güvenlik sistemi ve canlı URL temizleyici aktif.
+    </div>
+</div>
+
+<footer style="margin-top: 30px; margin-bottom: 20px; text-align: center; font-size: 11px; color: var(--subtext); max-width: 800px;">
+    <p>⚠️ <strong>Yasal Sorumluluk Reddi:</strong> Viroxa bir siber güvenlik simülatörüdür. Gösterilen skorlar sezgisel algoritmalarla üretilir.</p>
 </footer>
 
 <script>
-    let currentMode = 'all';
+    const defaultLibrary = [
+        { domain: "playmods.net", type: "Korsan APK / Mod", reason: "Zararlı mod APK dağıtımı" },
+        { domain: "free-robux-gen.com", type: "Oltalama / Phishing", reason: "Sahte Robux tuzağı" },
+        { domain: "google.com", type: "Güvenli / Onaylı", reason: "Resmi Arama Motoru" }
+    ];
 
-    function autoClean(el) {
-        let val = el.value;
-        if (val.includes('?utm_') || val.includes('&utm_')) {
-            el.value = val.split('?')[0];
+    let currentAnalysisData = null;
+
+    function getLibrary() {
+        const stored = localStorage.getItem('viroxa_lib');
+        return stored ? JSON.parse(stored) : defaultLibrary;
+    }
+
+    function saveLibrary(lib) {
+        localStorage.setItem('viroxa_lib', JSON.stringify(lib));
+        renderLibrary();
+    }
+
+    function renderLibrary() {
+        const lib = getLibrary();
+        const container = document.getElementById('libraryContainer');
+        document.getElementById('libCount').innerText = `${lib.length} Adres Kayıtlı`;
+        container.innerHTML = "";
+
+        lib.forEach((item, index) => {
+            let color = "var(--text)";
+            if (item.type.includes("Korsan")) color = "var(--orange)";
+            if (item.type.includes("Oltalama")) color = "var(--red)";
+            if (item.type.includes("Güvenli")) color = "var(--green)";
+            if (item.type.includes("İnceleme")) color = "#e0aaff";
+
+            container.innerHTML += `
+                <div class="tag-item">
+                    <span onclick="quickScan('${item.domain}')" style="cursor:pointer; color: ${color};">
+                        ● <b>${item.domain}</b>
+                    </span>
+                    <span class="tag-delete" onclick="deleteFromLibrary(${index})">✕</span>
+                </div>
+            `;
+        });
+    }
+
+    function autoCleanInput(inputEl) {
+        let val = inputEl.value;
+        
+        val = val.replace(/^http\/\//i, "http://");
+        val = val.replace(/^https\/\//i, "https://");
+        val = val.replace(/\s+/g, '');
+
+        if (val.includes('?utm_') || val.includes('&utm_') || val.includes('?ref=')) {
+            val = val.split('?')[0];
+            logToTerminal("⚡ Canlı URL Temizleyici: Gereksiz takip parametreleri silindi!");
         }
+
+        inputEl.value = val;
     }
 
-    function setMode(mode) {
-        currentMode = mode;
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        event.target.classList.add('active');
+    function submitCommunityReport() {
+        const domainInput = document.getElementById('reportDomainInput');
+        const reasonInput = document.getElementById('reportReasonInput');
+        let domain = domainInput.value.trim().toLowerCase().replace(/(http:\/\/|https:\/\/|www\.)/g, '').split('/')[0];
+
+        if (!domain) return alert("Geçerli bir adres yazın!");
+
+        let lib = getLibrary();
+        lib.push({ domain, type: "⏳ İnceleme Bekliyor (Topluluk)", reason: reasonInput.value || "Kullanıcı bildirimi" });
+        saveLibrary(lib);
+
+        domainInput.value = ""; reasonInput.value = "";
+        alert(`" ${domain} " adresi bildirildi!`);
     }
 
-    function enableCreatorMode() {
-        alert("🎬 Miraç Mirza İçerik Üretici Modu Aktif!\n\nArtık YouTube videolarındaki açıklamalar, hayran modelleri ve Roblox plugin linkleri derinlemesine taranıyor.");
+    function addDomainToLibrary() {
+        const input = document.getElementById('newDomainInput');
+        const typeSelect = document.getElementById('newTypeSelect');
+        let domain = input.value.trim().toLowerCase().replace(/(http:\/\/|https:\/\/|www\.)/g, '').split('/')[0];
+
+        if (!domain) return alert("Geçerli bir domain yazın!");
+
+        let lib = getLibrary();
+        lib.push({ domain, type: typeSelect.value, reason: "Manuel Ekleme" });
+        saveLibrary(lib);
+        input.value = "";
     }
 
-    function startCyberScan() {
-        const input = document.getElementById('targetUrl').value.trim();
-        if (!input) return alert("Lütfen geçerli bir adres yazın!");
+    function deleteFromLibrary(index) {
+        let lib = getLibrary();
+        lib.splice(index, 1);
+        saveLibrary(lib);
+    }
 
-        document.getElementById('loader').style.display = 'block';
-        document.getElementById('dashboard').style.display = 'none';
+    function logToTerminal(msg) {
+        const log = document.getElementById('terminalLog');
+        log.innerHTML += `<br>[${new Date().toLocaleTimeString()}] ${msg}`;
+        log.scrollTop = log.scrollHeight;
+    }
+
+    function quickScan(domain) {
+        document.getElementById('targetUrl').value = domain;
+        runAnalysis();
+    }
+
+    function copySecurityReport() {
+        if (!currentAnalysisData) return;
+
+        const reportText = `[VIROXA SİBER GÜVENLİK RAPORU]
+------------------------------------
+🎯 Hedef Adres: ${currentAnalysisData.url}
+🛡️ Güvenlik Skoru: %${currentAnalysisData.score}/100
+🚨 Tehdit Seviyesi: ${currentAnalysisData.threatLevel}
+🔍 Durum: ${currentAnalysisData.status}
+------------------------------------
+⚠️ AI Değerlendirmesi: ${currentAnalysisData.rawReason}
+⚡ Viroxa Cyber Hub tarafından taranmıştır.`;
+
+        navigator.clipboard.writeText(reportText).then(() => {
+            alert("📋 Güvenlik Raporu panoya kopyalandı! İstediğin yere yapıştırabilirsin.");
+        });
+    }
+
+    function aiFullAnalysis(url) {
+        const fullUrl = url.toLowerCase();
+        const cleanUrl = fullUrl.replace(/(http:\/\/|https:\/\/|www\.)/g, '').split('/')[0];
+        const robloxProtectionActive = document.getElementById('robloxFilterToggle').checked;
+        
+        const lib = getLibrary();
+        const libMatch = lib.find(x => cleanUrl.includes(x.domain));
+
+        let score = 100;
+        let threatLevel = "DÜŞÜK";
+        let status = "GÜVENLİ SAYFA";
+        let storeType = "WEB SİTESİ";
+        let threats = [];
+        let aiReasons = [];
+
+        if (robloxProtectionActive) {
+            if (/robux|rbx|cookie-stealer|cookie-grabber|bloxlink-fake|ro-py|account-steal/i.test(fullUrl)) {
+                score -= 75;
+                threats.push({ 
+                    name: "🎮 Roblox Cookie Stealer / Robux Tuzağı", 
+                    desc: "Oyun filtreleri bu adreste Roblox oturum çerezlerini (ROBLOSECURITY) veya hesap bilgilerini çalmaya yönelik zararlı kod deseni tespit etti.", 
+                    severity: "YÜKSEK" 
+                });
+                aiReasons.push("Roblox Cookie Stealer ve Sahte Robux tuzağı saptandı.");
+            }
+        }
+
+        if (libMatch && libMatch.type.includes("İnceleme Bekliyor")) {
+            score -= 40;
+            threats.push({ name: "Topluluk Şüpheli Adres Bildirimi", desc: `Gerekçe: "${libMatch.reason}"`, severity: "ORTA" });
+            aiReasons.push("Topluluk tarafından şüpheli olarak bildirilmiş.");
+        }
+
+        if (/free-gems|unlimited-hack|account-verify/i.test(fullUrl)) {
+            score -= 60;
+            threats.push({ name: "Phishing / Oltalama", desc: "Ücretsiz eşya vaadiyle şifre çalma riski.", severity: "YÜKSEK" });
+            aiReasons.push("Oltalama (Phishing) deseni bulundu.");
+        }
+
+        if (score < 40) {
+            threatLevel = "KRİTİK / YÜKSEK";
+            status = "TEHLİKELİ ADRES";
+        } else if (score < 75) {
+            threatLevel = "ORTA";
+            status = "ŞÜPHELİ SAYFA";
+        }
+
+        let rawReason = aiReasons.length > 0 ? aiReasons.join(" ") : "Zararlı koda rastlanmadı, sayfa güvenli görünüyor.";
+        let aiReasonText = `⚠️ <b>AI Analiz Gerekçesi:</b> ${rawReason}`;
+
+        currentAnalysisData = { url: cleanUrl, score: Math.max(score, 5), threatLevel, status, rawReason };
+
+        return { score: Math.max(score, 5), threatLevel, status, threats, aiReasonText, libMatch, storeType, robloxProtectionActive };
+    }
+
+    async function runAnalysis() {
+        let inputUrl = document.getElementById('targetUrl').value.trim();
+        const loader = document.getElementById('loader');
+        const dashboard = document.getElementById('dashboard');
+        const overlay = document.getElementById('simOverlay');
+
+        if (!inputUrl) return alert("Lütfen bir adres yazın!");
+
+        loader.style.display = 'block';
+        dashboard.style.display = 'none';
+
+        let formattedUrl = inputUrl.startsWith('http') ? inputUrl : 'https://' + inputUrl;
+        document.getElementById('simUrlBar').innerText = formattedUrl;
+        document.getElementById('simIframe').src = formattedUrl;
+
+        const result = aiFullAnalysis(formattedUrl);
 
         setTimeout(() => {
-            document.getElementById('loader').style.display = 'none';
-            document.getElementById('dashboard').style.display = 'block';
+            loader.style.display = 'none';
+            dashboard.style.display = 'block';
 
-            let score = 95;
-            let status = "GÜVENLİ SAYFA TESPİT EDİLDİ";
-            let threatLevel = "DÜŞÜK";
-            let threats = [];
-            let summary = "Viroxa AI yapay zeka taraması sonucunda bu adresin içerik üreticileri ve oyuncular için güvenli olduğu doğrulandı.";
+            document.getElementById('statusText').innerText = result.status;
+            document.getElementById('targetDisplay').innerText = formattedUrl;
+            document.getElementById('scoreVal').innerText = result.score;
+            document.getElementById('aiAssessmentText').innerHTML = result.aiReasonText;
 
-            const lower = input.toLowerCase();
+            const circle = document.getElementById('circleProgress');
+            circle.setAttribute('stroke-dasharray', `${result.score}, 100`);
 
-            if (lower.includes('robux') || lower.includes('cookie') || lower.includes('free-rbx')) {
-                score = 15;
-                status = "🚨 TEHLİKELİ OLTALAMA / COOKIE STEALER!";
-                threatLevel = "YÜKSEK";
-                summary = "UYARI: Bu adres Roblox hesap çerezlerini (ROBLOSECURITY) çalmaya yönelik şüpheli koda sahip. Miraç Mirza ve takipçilerinin kesinlikle uzak durması önerilir!";
-                threats.push({ title: "Roblox Cookie Grabber Riski", desc: "Hesap şifrenizi ve çerezlerinizi ele geçirmeye çalışıyor.", type: "HIGH" });
+            let circleColor = "var(--green)";
+            if (result.score < 50) circleColor = "var(--red)";
+            else if (result.score < 80) circleColor = "var(--orange)";
+            circle.style.stroke = circleColor;
+
+            document.getElementById('mThreatLevel').innerText = result.threatLevel;
+            document.getElementById('mStoreType').innerText = result.storeType;
+            document.getElementById('mRobloxStatus').innerText = result.robloxProtectionActive ? "AKTİF 🛡️" : "KAPALI";
+            document.getElementById('mLibRecord').innerText = result.libMatch ? "KAYITLI" : "GENEL TARAMA";
+
+            const threatList = document.getElementById('threatList');
+            threatList.innerHTML = "";
+
+            if (result.score >= 80) {
+                overlay.innerHTML = `<span style="font-size: 30px;">✅</span><p style="font-size: 11px; color: var(--green); margin-top: 6px;">AI Onaylı Güvenli</p>`;
             } else {
-                threats.push({ title: "SSL Sertifikası ve Bağlantı Güvenliği", desc: "Bağlantı şifrelenmiş ve güvenli ağ protokollü.", type: "SAFE" });
+                overlay.innerHTML = `<span style="font-size: 30px;">☠️</span><p style="font-size: 11px; color: var(--red); margin-top: 6px;">TEHLİKELİ ADRES!</p>`;
             }
 
-            document.getElementById('statusTitle').innerText = status;
-            document.getElementById('targetUrlDisplay').innerText = input;
-            document.getElementById('scoreValue').innerText = score;
-            document.getElementById('aiSummary').innerText = summary;
-            document.getElementById('mThreat').innerText = threatLevel;
-            document.getElementById('mRoblox').innerText = score < 50 ? "TEHLİKELİ" : "TEMİZ";
-
-            const list = document.getElementById('threatList');
-            list.innerHTML = "";
-            threats.forEach(t => {
-                list.innerHTML += `
-                    <li class="threat-item ${t.type}">
+            result.threats.forEach(t => {
+                let badgeClass = t.severity === 'YÜKSEK' ? 'badge-red' : 'badge-orange';
+                threatList.innerHTML += `
+                    <li class="threat-item ${t.severity}">
                         <div>
-                            <strong style="color:#fff;">${t.title}</strong>
-                            <p style="font-size:11px; color:var(--subtext); margin-top:3px;">${t.desc}</p>
+                            <strong style="color: #fff;">${t.name}</strong>
+                            <p style="font-size: 11px; color: var(--subtext); margin-top: 3px;">${t.desc}</p>
                         </div>
-                        <span style="font-size:11px; font-weight:bold; color:var(--${t.type === 'HIGH' ? 'red' : 'green'});">${t.type}</span>
+                        <span class="badge ${badgeClass}">${t.severity}</span>
                     </li>
                 `;
             });
 
-        }, 700);
+            logToTerminal(`✅ Tarama Bitti: ${result.score}/100 (${result.threatLevel})`);
+        }, 600);
     }
 
-    function copyReport() {
-        const url = document.getElementById('targetUrlDisplay').innerText;
-        const score = document.getElementById('scoreValue').innerText;
-        const text = `[VIROXA CYBER REPORT - MİRAÇ MİRZA EDITION]\nDirect URL: ${url}\nSafety Index: ${score}/100\nProtected by Viroxa AI`;
-        navigator.clipboard.writeText(text);
-        alert("📋 Rapor kopyalandı!");
-    }
+    window.onload = renderLibrary;
 </script>
 
 </body>
